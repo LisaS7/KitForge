@@ -64,19 +64,19 @@
 - The item is added with its default quantity
 - If the item is already in the kit, its quantity is incremented instead
 
-**FR-09: Drag and drop**
-- User can drag an item icon from the catalogue onto the bag image to add it
-- On drop: item is added to the kit and the packed items panel updates immediately
+**FR-08b: Drag and drop**
+- User can drag an item from the catalogue and drop it onto the kit area to add it
+- Drop behavior follows same logic as FR-08 (add with default qty or increment existing)
 
-**FR-10: Adjust quantity**
+**FR-09: Adjust quantity**
 - Each packed item shows − and + controls
 - When quantity reaches 0 via −, the item is removed from the kit automatically
 
-**FR-11: Remove item**
+**FR-10: Remove item**
 - User can remove an item from the packed items panel
 - The item is removed entirely regardless of quantity
 
-**FR-12: Collapse/expand category**
+**FR-11: Collapse/expand category**
 - Packed items are grouped by category in the right panel
 - Clicking a category header collapses or expands its item list
 
@@ -138,12 +138,13 @@
 ## Persistence
 
 **FR-19: Save kit**
-- Kit is saved to a local JSON file named by kit ID (e.g. `a3f8c1d2.json`)
-- Kit is saved automatically when the user generates the readiness report
-- Kit is also saved on any change (name, config, items) — auto-save, no explicit save button
+- Kit is saved to a local JSON file named by kit ID (e.g. `a3f8c1d2.json`) in `./data/kits/`
+- Kit changes are auto-saved after a debounce period (~500ms after last change)
+- Immediate save triggered on app close, kit switch, or navigating to readiness report
+- Directory created automatically if missing
 
 **FR-20: Load kit**
-- On launch, the app reads all kit JSON files from the kits directory
+- On launch, the app reads all kit JSON files from `./data/kits/`
 - Each valid kit is displayed as a card on the Kit List screen
 - If a kit references a catalogue item that no longer exists, that item is skipped and a warning is shown on the build screen
 
@@ -157,5 +158,5 @@
   - Every `requires` entry of type `item` references an existing item ID
   - Every `requires` entry of type `category` references a recognised category
   - No item requires itself
-  - No circular dependencies between items
-- If validation fails, the app displays an error and does not start
+  - No circular dependencies between items (detected via depth-first traversal: track current path, fail if item encountered twice in same path)
+- If validation fails, the app displays an error identifying the issue (e.g., "Circular dependency: A → B → C → A") and does not start
