@@ -1,0 +1,145 @@
+# KitForge — Data Model
+
+**Version:** 0.1  
+**Date:** 2026-05-03
+
+---
+
+## Entity Relationship Diagram
+
+```mermaid
+erDiagram
+    Kit {
+        string id
+        string name
+        datetime created_at
+        datetime modified_at
+    }
+
+    KitConfig {
+        int weight_limit_g
+        int num_people
+        int duration_days
+    }
+
+    KitItem {
+        string item_id
+        int qty
+    }
+
+    CatalogueItem {
+        string id
+        string name
+        Category category
+        int weight_g
+        int calories
+        int water_ml
+        int water_purification_ml
+        int default_qty
+        string notes
+    }
+
+    Requirement {
+        string type
+        string id
+        string category
+        string resource
+        int amount
+        bool exclude_self
+    }
+
+    Category {
+        string name
+        Priority priority
+    }
+
+    Kit ||--|| KitConfig : "has"
+    Kit ||--o{ KitItem : "contains"
+    KitItem }o--|| CatalogueItem : "references"
+    CatalogueItem ||--o{ Requirement : "has"
+    CatalogueItem }o--|| Category : "belongs to"
+```
+
+---
+
+## Field Reference
+
+### Kit
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string | Short random hex string; used as filename |
+| `name` | string | User-editable; defaults to "New Kit" |
+| `created_at` | datetime | ISO 8601; set on creation |
+| `modified_at` | datetime | ISO 8601; updated on any change |
+
+### KitConfig
+
+Stored as a nested object inside Kit.
+
+| Field | Type | Notes |
+|---|---|---|
+| `weight_limit_g` | int | Maximum carry weight in grams |
+| `num_people` | int | Number of people the kit must support |
+| `duration_days` | int | Number of days the kit must cover |
+
+### KitItem
+
+Each entry in the kit's `items` array.
+
+| Field | Type | Notes |
+|---|---|---|
+| `item_id` | string | References `CatalogueItem.id`; must never change |
+| `qty` | int | User-set quantity; minimum 1 |
+
+### CatalogueItem
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | string | Stable unique slug; must never change |
+| `name` | string | Display name |
+| `category` | Category | Enum value, e.g. `Category.WATER` |
+| `weight_g` | int | Weight per unit in grams |
+| `calories` | int | Calories per unit; 0 if not food |
+| `water_ml` | int | Stored water provided per unit; 0 if none |
+| `water_purification_ml` | int | Water purifiable per unit if a source is available; 0 if not applicable |
+| `default_qty` | int | Quantity applied when item is first added to a kit |
+| `notes` | string | Optional short description |
+| `requires` | Requirement[] | Dependency requirements; empty list if none |
+
+### Requirement
+
+Each entry in a `CatalogueItem`'s `requires` array. Fields used depend on `type`.
+
+| Field | Type | Used when |
+|---|---|---|
+| `type` | string | Always — `"item"`, `"category"`, or `"resource"` |
+| `id` | string | `type = "item"` |
+| `category` | string | `type = "category"` |
+| `exclude_self` | bool | `type = "category"` — if true, the item itself does not satisfy its own category requirement; defaults to false |
+| `resource` | string | `type = "resource"` — `"water_source"` or `"water_ml"` |
+| `amount` | int | `type = "resource"`, `resource = "water_ml"` — minimum ml of stored water required |
+
+### Category
+
+| Name | Priority |
+|---|---|
+| Water | Required |
+| Food | Required |
+| Medical | Required |
+| Light | Required |
+| Fire | Warning |
+| Shelter | Warning |
+| Tools | Warning |
+| Navigation | Optional |
+| Hygiene | Optional |
+| Communication | Optional |
+| Documents | Optional |
+
+**Priority weights** (used in readiness score):
+
+| Priority | Weight |
+|---|---|
+| Required | 3 |
+| Warning | 2 |
+| Optional | 1 |
