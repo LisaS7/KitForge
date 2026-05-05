@@ -37,9 +37,10 @@
 ## Kit Configuration
 
 **FR-05: Configure kit**
-- User can set: weight limit (grams), number of people, duration (days)
+- User can set: weight limit (grams), number of adults, number of children (6-12), number of young children (2-5), number of infants (0-1), duration (days)
 - Configuration modal is opened on kit creation and via a button on the build screen
-- All fields are required; duration is a plain number input
+- Weight limit and duration are required; age group fields default to 0 (at least one person must be specified)
+- Calorie and water requirements calculated using: adults ~2000 kcal/3L, children ~1500 kcal/2L, young children ~1200 kcal/1.5L, infants ~700 kcal/1L per day
 
 ---
 
@@ -90,7 +91,7 @@
 **FR-14: Stats display**
 - Displays: total weight (g), total calories, stored water (ml), purifiable water (ml)
 - Stored water and purifiable water are shown separately and never summed
-- Calories and water are scaled by number of people and duration for sufficiency display
+- Calories and water requirements calculated from age breakdown × duration; packed amounts shown as fraction of requirement
 
 **FR-14b: Category warning indicators**
 - A warning icon is shown next to any category not yet covered in the packed items panel

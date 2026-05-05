@@ -22,7 +22,7 @@
 
   .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; }
 
-  .modal { background: var(--bg); border: 2px solid var(--dark); width: 400px; display: flex; flex-direction: column; }
+  .modal { background: var(--bg); border: 2px solid var(--dark); width: 400px; max-height: 90vh; display: flex; flex-direction: column; }
   .modal-header { padding: 14px 20px; border-bottom: 2px solid var(--dark); background: var(--khaki); display: flex; justify-content: space-between; align-items: center; }
   .modal-title { font-size: 15px; font-weight: bold; }
   .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: #666; }
@@ -67,12 +67,39 @@
         </div>
 
         <div class="field">
-          <label>Number of People</label>
+          <label>Adults (13+ years)</label>
           <div class="input-row">
             <input type="number" value="1">
             <span class="unit">people</span>
           </div>
-          <span class="field-hint">Kit will be sized to cover this many people</span>
+          <span class="field-hint">~2000 kcal/day, ~3L water/day per person</span>
+        </div>
+
+        <div class="field">
+          <label>Children (6-12 years)</label>
+          <div class="input-row">
+            <input type="number" value="0">
+            <span class="unit">people</span>
+          </div>
+          <span class="field-hint">~1500 kcal/day, ~2L water/day per person</span>
+        </div>
+
+        <div class="field">
+          <label>Young Children (2-5 years)</label>
+          <div class="input-row">
+            <input type="number" value="0">
+            <span class="unit">people</span>
+          </div>
+          <span class="field-hint">~1200 kcal/day, ~1.5L water/day per person</span>
+        </div>
+
+        <div class="field">
+          <label>Infants (0-1 years)</label>
+          <div class="input-row">
+            <input type="number" value="0">
+            <span class="unit">people</span>
+          </div>
+          <span class="field-hint">~700 kcal/day, ~1L water/day per person</span>
         </div>
 
         <div class="field">

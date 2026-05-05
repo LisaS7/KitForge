@@ -39,8 +39,11 @@
   .stat-box { flex: 1; border: 2px solid var(--dark); padding: 14px 16px; background: var(--surface); }
   .stat-box .label { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 0.04em; }
   .stat-box .value { font-size: 20px; font-weight: bold; margin-top: 4px; }
-  .weight-bar { height: 8px; background: var(--border); margin-top: 6px; border: 1px solid #aaa; }
-  .weight-fill { width: 43%; height: 100%; background: var(--olive); }
+  .progress-bar { height: 8px; background: var(--border); margin-top: 6px; border: 1px solid #aaa; }
+  .progress-fill { height: 100%; }
+  .progress-fill.weight { width: 43%; background: var(--olive); }
+  .progress-fill.calories { width: 40%; background: var(--danger); }
+  .progress-fill.water { width: 44%; background: var(--danger); }
 
   .section-title { font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 8px; }
   .category-table { width: 100%; border-collapse: collapse; }
@@ -97,15 +100,17 @@
       <div class="stat-box">
         <div class="label">Weight</div>
         <div class="value">6.4 kg / 15 kg</div>
-        <div class="weight-bar"><div class="weight-fill"></div></div>
+        <div class="progress-bar"><div class="progress-fill weight"></div></div>
       </div>
       <div class="stat-box">
         <div class="label">Calories</div>
-        <div class="value">2,400 kcal</div>
+        <div class="value">2,400 / 6,000 kcal</div>
+        <div class="progress-bar"><div class="progress-fill calories"></div></div>
       </div>
       <div class="stat-box">
         <div class="label">Water</div>
-        <div class="value">4 L</div>
+        <div class="value">4 / 9 L</div>
+        <div class="progress-bar"><div class="progress-fill water"></div></div>
       </div>
       <div class="stat-box">
         <div class="label">Duration</div>

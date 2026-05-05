@@ -18,7 +18,10 @@ erDiagram
 
     KitConfig {
         int weight_limit_g
-        int num_people
+        int num_adults
+        int num_children
+        int num_young_children
+        int num_infants
         int duration_days
     }
 
@@ -80,7 +83,10 @@ Stored as a nested object inside Kit.
 | Field | Type | Notes |
 |---|---|---|
 | `weight_limit_g` | int | Maximum carry weight in grams |
-| `num_people` | int | Number of people the kit must support |
+| `num_adults` | int | Number of adults (13+ years); ~2000 kcal/day, ~3L water/day |
+| `num_children` | int | Number of children (6-12 years); ~1500 kcal/day, ~2L water/day |
+| `num_young_children` | int | Number of young children (2-5 years); ~1200 kcal/day, ~1.5L water/day |
+| `num_infants` | int | Number of infants (0-1 years); ~700 kcal/day, ~1L water/day |
 | `duration_days` | int | Number of days the kit must cover |
 
 ### KitItem
