@@ -4,7 +4,7 @@ from pathlib import Path
 catalogue_path = Path("data/catalogue.json")
 
 
-def load_json():
+def load_catalogue() -> list[dict]:
     with open(catalogue_path) as f:
         data = json.load(f)["items"]
 
@@ -12,7 +12,7 @@ def load_json():
     return data
 
 
-def group_by_category(data):
+def group_by_category(data: list[dict]) -> dict[str, list[dict]]:
     categories = {}
 
     for item in data:

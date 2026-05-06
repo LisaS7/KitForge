@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def build_header():
+def build_header() -> ft.Control:
     return ft.Column(
         [
             ft.Text("KitForge", size=32, weight=ft.FontWeight.BOLD),
@@ -10,7 +10,7 @@ def build_header():
     )
 
 
-def build_catalogue(categories):
+def build_catalogue(categories: dict[str, list[dict]]) -> ft.Control:
 
     grouped_catalogue_items: list[ft.Control] = []
     for category, items in categories.items():
@@ -33,14 +33,14 @@ def build_catalogue(categories):
     )
 
 
-def build_kit_panel():
+def build_kit_panel() -> ft.Control:
     return ft.Container(
         content=ft.Column([ft.Text("Kit List"), ft.Text("No items packed yet!")]),
         expand=1,
     )
 
 
-def build_screen(categories):
+def build_screen(categories: dict[str, list[dict]]) -> ft.Control:
     header = build_header()
     catalogue_panel = build_catalogue(categories)
     kit_panel = build_kit_panel()
