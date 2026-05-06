@@ -1,0 +1,29 @@
+# styles.py
+
+BACKGROUND = "#f1f1f1"
+SURFACE = "#d9d9d9"
+BORDER = "#c7c7c7"
+TEXT = "#2e2e2e"
+
+ACCENT = "#cfcfb5"
+PRIMARY = "#5a6e3a"
+WARNING = "#b87c00"
+DANGER = "#a63030"
+
+
+# Spacing
+PAGE_PADDING = 24
+PANEL_PADDING = 12
+SECTION_SPACING = 16
+ITEM_SPACING = 8
+
+
+# Text sizes
+TITLE_SIZE = 32
+PANEL_TITLE_SIZE = 24
+CATEGORY_TITLE_SIZE = 20
+BODY_SIZE = 14
+
+
+# Borders
+BORDER_WIDTH = 1

@@ -1,10 +1,11 @@
 import flet as ft
+import views.styles as styles
 
 
 def build_header() -> ft.Control:
     return ft.Column(
         [
-            ft.Text("KitForge", size=32, weight=ft.FontWeight.BOLD),
+            ft.Text("KitForge", size=styles.TITLE_SIZE, weight=ft.FontWeight.BOLD),
             ft.Text("Emergency kit planner"),
         ]
     )
@@ -15,17 +16,23 @@ def build_catalogue(categories: dict[str, list[dict]]) -> ft.Control:
     grouped_catalogue_items: list[ft.Control] = []
     for category, items in categories.items():
         grouped_catalogue_items.append(
-            ft.Text(category, size=20, weight=ft.FontWeight.BOLD)
+            ft.Text(
+                category, size=styles.CATEGORY_TITLE_SIZE, weight=ft.FontWeight.BOLD
+            )
         )
 
         for item in items[:3]:
             grouped_catalogue_items.append(
-                ft.Text(f"- {item['name']}", color="#2e2e2e")
+                ft.Text(f"- {item['name']}", color=styles.TEXT)
             )
 
     return ft.Container(
         content=ft.Column(
-            controls=[ft.Text("Catalogue", size=24, weight=ft.FontWeight.BOLD)]
+            controls=[
+                ft.Text(
+                    "Catalogue", size=styles.PANEL_TITLE_SIZE, weight=ft.FontWeight.BOLD
+                )
+            ]
             + grouped_catalogue_items,
             scroll=ft.ScrollMode.AUTO,
         ),
