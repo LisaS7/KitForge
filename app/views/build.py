@@ -1,5 +1,6 @@
 import flet as ft
 import views.styles as styles
+from models import CatalogueItem, Category
 
 
 def build_header() -> ft.Control:
@@ -15,7 +16,7 @@ def build_header() -> ft.Control:
     )
 
 
-def build_catalogue(categories: dict[str, list[dict]]) -> ft.Control:
+def build_catalogue(categories: dict[Category, list[CatalogueItem]]) -> ft.Control:
 
     grouped_catalogue_items: list[ft.Control] = []
     for category, items in categories.items():
@@ -26,7 +27,7 @@ def build_catalogue(categories: dict[str, list[dict]]) -> ft.Control:
         )
 
         for item in items[:3]:
-            grouped_catalogue_items.append(ft.Text(f"- {item['name']}"))
+            grouped_catalogue_items.append(ft.Text(f"- {item.name}"))
 
     return ft.Container(
         content=ft.Column(
@@ -61,7 +62,7 @@ def build_kit_panel() -> ft.Control:
     )
 
 
-def build_screen(categories: dict[str, list[dict]]) -> ft.Control:
+def build_screen(categories: dict[Category, list[CatalogueItem]]) -> ft.Control:
     header = build_header()
     catalogue_panel = build_catalogue(categories)
     kit_panel = build_kit_panel()
