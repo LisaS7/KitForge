@@ -129,7 +129,7 @@
       "requires": [
         {
           "type": "category",
-          "category": "Fire"
+          "target_category": "Fire"
         },
         {
           "type": "resource",
@@ -175,7 +175,7 @@
       "requires": [
         {
           "type": "category",
-          "category": "Fire"
+          "target_category": "Fire"
         },
         {
           "type": "resource",
@@ -317,7 +317,7 @@
       "requires": [
         {
           "type": "item",
-          "id": "headtorch"
+          "target_id": "headtorch"
         }
       ]
     },
@@ -358,7 +358,7 @@
       "requires": [
         {
           "type": "category",
-          "category": "Fire",
+          "target_category": "Fire",
           "exclude_self": true
         }
       ]
@@ -412,7 +412,7 @@
       "requires": [
         {
           "type": "category",
-          "category": "Fire",
+          "target_category": "Fire",
           "exclude_self": true
         }
       ]
@@ -430,7 +430,7 @@
       "requires": [
         {
           "type": "item",
-          "id": "gas_canister"
+          "target_id": "gas_canister"
         }
       ]
     },
@@ -447,7 +447,7 @@
       "requires": [
         {
           "type": "item",
-          "id": "camp_stove"
+          "target_id": "camp_stove"
         }
       ]
     },
@@ -524,7 +524,7 @@
       "requires": [
         {
           "type": "category",
-          "category": "Shelter",
+          "target_category": "Shelter",
           "exclude_self": true
         }
       ]
@@ -806,7 +806,7 @@
       "requires": [
         {
           "type": "item",
-          "id": "power_bank"
+          "target_id": "power_bank"
         }
       ]
     },
