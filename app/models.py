@@ -96,3 +96,10 @@ class Kit(BaseModel):
             modified_at=now,
             config=config,
         )
+
+    def add_item(self, item_id: str):
+        existing = next((i for i in self.items if i.item_id == item_id), None)
+        if existing:
+            existing.qty += 1
+        else:
+            self.items.append(KitItem(item_id=item_id, qty=1))
