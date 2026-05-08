@@ -11,6 +11,12 @@ logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
 )
 
+logging.getLogger("flet").setLevel(logging.WARNING)
+logging.getLogger("flet_desktop").setLevel(logging.WARNING)
+logging.getLogger("flet_transport").setLevel(logging.WARNING)
+logging.getLogger("flet_controls").setLevel(logging.WARNING)
+logging.getLogger("asyncio").setLevel(logging.WARNING)
+
 
 def main(page: ft.Page) -> None:
     configure_page(page)
@@ -28,7 +34,7 @@ def main(page: ft.Page) -> None:
     )
     kit = Kit.create("Test Kit", kit_config)
 
-    build_view = build_screen(categories, kit)
+    build_view = build_screen(page, categories, kit)
 
     page.add(build_view)
 
