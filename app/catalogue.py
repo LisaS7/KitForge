@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from models import CatalogueItem, Category
+from .models import CatalogueItem, Category
 
 catalogue_path = Path("data/catalogue.json")
 

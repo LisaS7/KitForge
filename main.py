@@ -1,7 +1,7 @@
 import flet as ft
-import views.styles as styles
-from catalogue import group_by_category, load_catalogue
-from views.build import build_screen
+from app.views import styles
+from app.catalogue import group_by_category, load_catalogue
+from app.views.build import build_screen
 
 
 def configure_page(page: ft.Page) -> None:

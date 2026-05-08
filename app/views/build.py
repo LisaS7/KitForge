@@ -1,6 +1,6 @@
 import flet as ft
-import views.styles as styles
-from models import CatalogueItem, Category
+from . import styles
+from ..models import CatalogueItem, Category
 
 
 def build_header() -> ft.Control:
