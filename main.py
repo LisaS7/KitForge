@@ -3,12 +3,17 @@ import logging
 import flet as ft
 
 from app.catalogue import group_by_category, load_catalogue
+from app.config import LOG_FILE
 from app.models import Kit, KitConfig
 from app.views.build import build_screen
 from app.views.page import configure_page
 
 logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+    level=logging.DEBUG,
+    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE),
+    ],
 )
 
 logging.getLogger("flet").setLevel(logging.WARNING)
