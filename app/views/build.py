@@ -1,6 +1,7 @@
 import flet as ft
+
+from ..models import CatalogueItem, Category, Kit
 from . import styles
-from ..models import CatalogueItem, Category
 
 
 def build_header() -> ft.Control:
@@ -46,7 +47,12 @@ def build_catalogue(categories: dict[Category, list[CatalogueItem]]) -> ft.Contr
     )
 
 
-def build_kit_panel() -> ft.Control:
+def build_kit_panel(kit: Kit) -> ft.Control:
+    if not kit.items:
+        item_controls = [ft.Text("No items packed yet!", italic=True)]
+    else:
+        item_controls = [ft.Text(f"{item.item_id} x {item.qty}") for item in kit.items]
+
     return ft.Container(
         content=ft.Column(
             [
@@ -55,17 +61,19 @@ def build_kit_panel() -> ft.Control:
                     size=styles.PANEL_TITLE_SIZE,
                     weight=ft.FontWeight.BOLD,
                 ),
-                ft.Text("No items packed yet!", italic=True),
+                *item_controls,
             ]
         ),
         expand=1,
     )
 
 
-def build_screen(categories: dict[Category, list[CatalogueItem]]) -> ft.Control:
+def build_screen(
+    categories: dict[Category, list[CatalogueItem]], kit: Kit
+) -> ft.Control:
     header = build_header()
     catalogue_panel = build_catalogue(categories)
-    kit_panel = build_kit_panel()
+    kit_panel = build_kit_panel(kit)
 
     main_content = ft.Row(
         controls=[catalogue_panel, kit_panel],

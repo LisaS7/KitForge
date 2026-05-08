@@ -1,4 +1,5 @@
 import datetime as dt
+import uuid
 from enum import StrEnum
 
 from pydantic import BaseModel, Field, model_validator
@@ -84,3 +85,14 @@ class Kit(BaseModel):
     modified_at: dt.datetime
     config: KitConfig
     items: list[KitItem] = Field(default_factory=list)
+
+    @classmethod
+    def create(cls, name: str, config: KitConfig):
+        now = dt.datetime.now(dt.timezone.utc)
+        return cls(
+            id=str(uuid.uuid4()),
+            name=name,
+            created_at=now,
+            modified_at=now,
+            config=config,
+        )
