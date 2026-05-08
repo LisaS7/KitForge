@@ -2,8 +2,8 @@
 
 ## Infrastructure
 
-- [ ] Define Pydantic models for `Kit`, `KitConfig`, `PackedItem`, `CatalogueItem`, `Requirement`
-- [ ] Write catalogue loader (parse `data/catalogue.json` into models)
+- [x] Define Pydantic models for `Kit`, `KitConfig`, `PackedItem`, `CatalogueItem`, `Requirement`
+- [x] Write catalogue loader (parse `data/catalogue.json` into models)
 - [ ] FR-21: Catalogue integrity check on startup (unique IDs, valid refs, no circular deps)
 - [ ] FR-19: Kit persistence — save kit to `data/kits/<id>.json`
 - [ ] FR-19: Auto-save with debounce (~500ms); immediate save on close/switch/report

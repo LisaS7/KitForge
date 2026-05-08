@@ -3,10 +3,10 @@
 ## Phase 1: App Skeleton + Data
 **Goal: See catalogue in UI**
 
-- [ ] Define core Pydantic models
-- [ ] Load `catalogue.json`
-- [ ] Minimal Flet app (single screen)
-- [ ] Render catalogue items
+- [x] Define core Pydantic models
+- [x] Load `catalogue.json`
+- [x] Minimal Flet app (single screen)
+- [x] Render catalogue items
 
 ---
 
@@ -17,7 +17,7 @@
 - [ ] Add item (FR-08)
 - [ ] Increment existing item (FR-08)
 - [ ] Decrement/remove item (FR-09, FR-10)
-- [ ] Display packed items list
+- [~] Display packed items list
 
 ---
 
