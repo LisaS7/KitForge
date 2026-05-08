@@ -42,7 +42,7 @@
 
 ## Kit Building
 
-- [ ] FR-08: Click item in catalogue → add to packed items at default quantity (or increment if already present)
+- [x] FR-08: Click item in catalogue → add to packed items at default quantity (or increment if already present)
 - [ ] FR-08b: Drag item from catalogue → drop onto kit area (same add/increment logic)
 - [ ] FR-09: Quantity controls (− / +) on each packed item; remove at 0
 - [ ] FR-10: Explicit remove button on packed items

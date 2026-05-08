@@ -13,11 +13,11 @@
 ## Phase 2: Basic Kit Building
 **Goal: Add/remove items in memory**
 
-- [ ] Create in-memory kit
-- [ ] Add item (FR-08)
-- [ ] Increment existing item (FR-08)
+- [x] Create in-memory kit
+- [x] Add item (FR-08)
+- [x] Increment existing item (FR-08)
 - [ ] Decrement/remove item (FR-09, FR-10)
-- [~] Display packed items list
+- [x] Display packed items list
 
 ---
 
