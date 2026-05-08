@@ -1,13 +1,11 @@
 import json
-from pathlib import Path
 
+from .config import CATALOGUE_PATH
 from .models import CatalogueItem, Category
-
-catalogue_path = Path("data/catalogue.json")
 
 
 def load_catalogue() -> list[CatalogueItem]:
-    with open(catalogue_path) as f:
+    with open(CATALOGUE_PATH) as f:
         data = json.load(f)["items"]
 
     print(f"Loaded {len(data)} items")
