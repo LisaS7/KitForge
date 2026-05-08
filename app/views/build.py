@@ -20,6 +20,13 @@ def build_header() -> ft.Control:
     )
 
 
+def handle_add_item(controller: BuildController, item: CatalogueItem):
+    def on_click(e):
+        controller.add_item(item)
+
+    return on_click
+
+
 def build_catalogue(controller: BuildController) -> ft.Control:
 
     grouped_catalogue_items: list[ft.Control] = []
@@ -31,7 +38,12 @@ def build_catalogue(controller: BuildController) -> ft.Control:
         )
 
         for item in items[:3]:
-            grouped_catalogue_items.append(ft.Text(f"- {item.name}"))
+            grouped_catalogue_items.append(
+                ft.Button(
+                    content=item.name,
+                    on_click=handle_add_item(controller, item),
+                )
+            )
 
     return ft.Container(
         content=ft.Column(
