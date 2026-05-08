@@ -107,3 +107,28 @@ def test_catalogue_item_zero_qty_rejected():
 def test_kit_item_zero_qty_rejected():
     with pytest.raises(ValidationError):
         KitItem(item_id="x", qty=0)
+
+
+# --- Kit.add_item ---
+
+def test_add_item_new():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    assert len(kit.items) == 1
+    assert kit.items[0].item_id == "item_1"
+    assert kit.items[0].qty == 1
+
+
+def test_add_item_increments_existing():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.add_item("item_1")
+    assert len(kit.items) == 1
+    assert kit.items[0].qty == 2
+
+
+def test_add_item_distinct_items():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.add_item("item_2")
+    assert len(kit.items) == 2
