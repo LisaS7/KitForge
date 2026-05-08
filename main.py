@@ -1,7 +1,14 @@
+import logging
+
 import flet as ft
-from app.views import styles
+
 from app.catalogue import group_by_category, load_catalogue
+from app.views import styles
 from app.views.build import build_screen
+
+logging.basicConfig(
+    level=logging.DEBUG, format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+)
 
 
 def configure_page(page: ft.Page) -> None:
