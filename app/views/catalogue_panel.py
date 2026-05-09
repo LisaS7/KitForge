@@ -39,7 +39,7 @@ def build_catalogue_panel(controller: "BuildController") -> ft.Control:  # type:
             + grouped_catalogue_items,
             scroll=ft.ScrollMode.AUTO,
         ),
-        expand=2,
+        expand=1,
         padding=styles.PANEL_PADDING,
         bgcolor=styles.SURFACE,
         border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
