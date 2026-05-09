@@ -132,3 +132,97 @@ def test_add_item_distinct_items():
     kit.add_item("item_1")
     kit.add_item("item_2")
     assert len(kit.items) == 2
+
+
+def test_add_item_updates_modified_at():
+    kit = Kit.create("Bag", make_config())
+    before = kit.modified_at
+    kit.add_item("item_1")
+    assert kit.modified_at >= before
+
+
+# --- Kit.remove_item ---
+
+def test_remove_item():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.remove_item("item_1")
+    assert kit.items == []
+
+
+def test_remove_item_leaves_others():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.add_item("item_2")
+    kit.remove_item("item_1")
+    assert len(kit.items) == 1
+    assert kit.items[0].item_id == "item_2"
+
+
+def test_remove_item_missing_is_noop():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.remove_item("item_99")
+    assert len(kit.items) == 1
+
+
+def test_remove_item_updates_modified_at():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    before = kit.modified_at
+    kit.remove_item("item_1")
+    assert kit.modified_at >= before
+
+
+# --- Kit.increment_item ---
+
+def test_increment_item():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.increment_item("item_1")
+    assert kit.items[0].qty == 2
+
+
+def test_increment_item_missing_is_noop():
+    kit = Kit.create("Bag", make_config())
+    kit.increment_item("item_99")
+    assert kit.items == []
+
+
+def test_increment_item_updates_modified_at():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    before = kit.modified_at
+    kit.increment_item("item_1")
+    assert kit.modified_at >= before
+
+
+# --- Kit.decrement_item ---
+
+def test_decrement_item_reduces_qty():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.add_item("item_1")
+    kit.decrement_item("item_1")
+    assert kit.items[0].qty == 1
+
+
+def test_decrement_item_removes_at_one():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    kit.decrement_item("item_1")
+    assert kit.items == []
+
+
+def test_decrement_item_missing_is_noop():
+    kit = Kit.create("Bag", make_config())
+    kit.decrement_item("item_99")
+    assert kit.items == []
+
+
+def test_decrement_item_updates_modified_at():
+    kit = Kit.create("Bag", make_config())
+    kit.add_item("item_1")
+    before = kit.modified_at
+    kit.decrement_item("item_1")
+    assert kit.modified_at >= before

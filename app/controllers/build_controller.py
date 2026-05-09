@@ -23,17 +23,19 @@ class BuildController:
 
     def add_item(self, item: CatalogueItem) -> None:
         self.kit.add_item(item.id)
-        self.refresh_kit()
-        self.page.update()
+        self.refresh_all()
 
     def remove_item(self, item_id: str) -> None:
-        pass
+        self.kit.remove_item(item_id)
+        self.refresh_all()
 
     def increment_item(self, item_id: str) -> None:
-        pass
+        self.kit.increment_item(item_id)
+        self.refresh_all()
 
     def decrement_item(self, item_id: str) -> None:
-        pass
+        self.kit.decrement_item(item_id)
+        self.refresh_all()
 
     def refresh_catalogue(self) -> None:
         pass
@@ -41,7 +43,7 @@ class BuildController:
     def refresh_kit(self) -> None:
         if self.kit_column is None:
             return
-        self.kit_column.controls = build_kit_controls(self.kit)
+        self.kit_column.controls = build_kit_controls(self)
 
     def refresh_stats(self) -> None:
         pass

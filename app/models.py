@@ -99,15 +99,30 @@ class Kit(BaseModel):
 
     def add_item(self, item_id: str):
         existing = next((i for i in self.items if i.item_id == item_id), None)
+
+        if existing:
+            existing.qty += 1
+        else:
+            self.items.append(KitItem(item_id=item_id, qty=1))
+
+        self.modified_at = dt.datetime.now(dt.timezone.utc)
+
+    def remove_item(self, item_id: str):
+        self.items = [item for item in self.items if item.item_id != item_id]
+        self.modified_at = dt.datetime.now(dt.timezone.utc)
+
+    def increment_item(self, item_id: str):
+        existing = next((i for i in self.items if i.item_id == item_id), None)
+
         if not existing:
             return
 
         existing.qty += 1
-        self.items.append(KitItem(item_id=item_id, qty=1))
         self.modified_at = dt.datetime.now(dt.timezone.utc)
 
-    def remove_item(self, item_id: str):
+    def decrement_item(self, item_id: str):
         existing = next((i for i in self.items if i.item_id == item_id), None)
+
         if not existing:
             return
 
