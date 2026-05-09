@@ -8,7 +8,41 @@
 - [ ] FR-19: Kit persistence — save kit to `data/kits/<id>.json`
 - [ ] FR-19: Auto-save with debounce (~500ms); immediate save on close/switch/report
 - [ ] FR-20: Kit loader — read all `data/kits/*.json` on launch; skip missing catalogue items with warning
-- [ ] Wire up Flet app shell (`main.py`) with basic navigation between Kit List and Build screens
+- [ ] Wire up screen routing (`AppController`) with navigation between Kit List and Build screens
+
+---
+
+## Build Screen Layout & Styling
+
+- [ ] Refactor `build.py` into 3-panel layout: catalogue (fixed 220px) / centre (flex) / packed items (fixed 240px)
+- [ ] Split into `catalogue_panel.py`, `centre_panel.py`, `kit_panel.py`
+- [ ] Add `CATEGORY_METADATA` dict mapping `Category` → `{icon, priority}` (required/warning/optional)
+- [ ] Header: khaki background, kit name field (dashed border), Configure and Build buttons right-aligned
+- [ ] Panel titles: uppercase, 12px, letter-spaced, surface background, bottom border
+- [ ] Hard 2px dark borders between all panels (left/right separators)
+- [ ] Update `styles.py`: add `KHAKI`, `SUCCESS`, `PANEL_TITLE_STYLE`, `LABEL_STYLE`
+- [ ] Bag area: centred 🎒 icon, dashed border container, "Drag items here" hint text
+- [ ] Stats bar shell: weight (with bar), calories, water, duration, readiness — layout only, no live data yet
+
+---
+
+## Catalogue Browsing
+
+- [ ] FR-06: Category icon grid — 2-column, square cards with icon + label
+- [ ] FR-06: Warning indicator (⚠) on category cards for uncovered categories
+- [ ] FR-06: Click category → item grid view (2-column cards with icon + label)
+- [ ] FR-06: Back button returns to category grid
+- [ ] FR-07: Item tooltip showing weight, calories, water, notes
+
+---
+
+## Kit Building
+
+- [x] FR-08: Click item in catalogue → add to packed items at default quantity (or increment if already present)
+- [ ] FR-08b: Drag item from catalogue → drop onto bag area (same add/increment logic)
+- [x] FR-09: Quantity controls (− / +) on each packed item; remove at 0
+- [x] FR-10: Explicit remove button on packed items
+- [ ] FR-11: Packed items grouped by category with collapsible headers; compact −/+ qty controls
 
 ---
 
@@ -32,30 +66,13 @@
 
 ---
 
-## Catalogue Browsing
-
-- [ ] FR-06: Catalogue panel — category icon grid
-- [ ] FR-06: Click category → item list view; back button returns to category grid
-- [ ] FR-07: Item tooltip showing weight, calories, water, notes
-
----
-
-## Kit Building
-
-- [x] FR-08: Click item in catalogue → add to packed items at default quantity (or increment if already present)
-- [ ] FR-08b: Drag item from catalogue → drop onto kit area (same add/increment logic)
-- [x] FR-09: Quantity controls (− / +) on each packed item; remove at 0
-- [x] FR-10: Explicit remove button on packed items
-- [ ] FR-11: Packed items grouped by category with collapsible headers
-
----
-
 ## Stats
 
 - [ ] FR-13: Weight bar — fill proportion vs limit; green <75%, amber 75–99%, red ≥100%
-- [ ] FR-14: Stats display — total weight (g), total calories, stored water (ml), purifiable water (ml)
+- [ ] FR-14: Stats service — `get_total_weight()`, `get_calories()`, `get_water_ml()`, `get_readiness_score()`
+- [ ] FR-14: Wire stats into stats bar (live update on add/remove)
 - [ ] FR-14: Calories and water shown as fraction of requirement (people × duration)
-- [ ] FR-14b: Warning icon next to uncovered categories in packed items panel (live)
+- [ ] FR-14b: Warning indicator on category cards for uncovered categories (live)
 
 ---
 
