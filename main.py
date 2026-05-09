@@ -45,4 +45,7 @@ def main(page: ft.Page) -> None:
 
 
 if __name__ == "__main__":
-    ft.run(main=main)
+    ft.run(
+        main=main,
+        assets_dir="assets",
+    )
