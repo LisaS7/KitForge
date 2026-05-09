@@ -1,8 +1,11 @@
 import datetime as dt
+import logging
 import uuid
 from enum import StrEnum
 
 from pydantic import BaseModel, Field, model_validator
+
+logger = logging.getLogger(__name__)
 
 
 class Category(StrEnum):
@@ -102,33 +105,47 @@ class Kit(BaseModel):
 
         if existing:
             existing.qty += 1
+            logger.debug(
+                "Incremented %s to qty %d in kit %s", item_id, existing.qty, self.id
+            )
         else:
             self.items.append(KitItem(item_id=item_id, qty=1))
+            logger.debug("Added %s to kit %s", item_id, self.id)
 
         self.modified_at = dt.datetime.now(dt.timezone.utc)
 
     def remove_item(self, item_id: str):
         self.items = [item for item in self.items if item.item_id != item_id]
+        logger.debug("Removed %s from kit %s", item_id, self.id)
         self.modified_at = dt.datetime.now(dt.timezone.utc)
 
     def increment_item(self, item_id: str):
         existing = next((i for i in self.items if i.item_id == item_id), None)
 
         if not existing:
+            logger.debug("increment_item: %s not found in kit %s", item_id, self.id)
             return
 
         existing.qty += 1
+        logger.debug(
+            "Incremented %s to qty %d in kit %s", item_id, existing.qty, self.id
+        )
         self.modified_at = dt.datetime.now(dt.timezone.utc)
 
     def decrement_item(self, item_id: str):
         existing = next((i for i in self.items if i.item_id == item_id), None)
 
         if not existing:
+            logger.debug("decrement_item: %s not found in kit %s", item_id, self.id)
             return
 
         if existing.qty > 1:
             existing.qty -= 1
+            logger.debug(
+                "Decremented %s to qty %d in kit %s", item_id, existing.qty, self.id
+            )
         else:
             self.items = [item for item in self.items if item.item_id != item_id]
+            logger.debug("Removed %s from kit %s (qty reached 0)", item_id, self.id)
 
         self.modified_at = dt.datetime.now(dt.timezone.utc)
