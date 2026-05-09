@@ -44,8 +44,8 @@ erDiagram
 
     Requirement {
         string type
-        string id
-        string category
+        string target_id
+        string target_category
         string resource
         int amount
         bool exclude_self
@@ -71,7 +71,7 @@ erDiagram
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | Short random hex string; used as filename |
+| `id` | string | UUID v4; used as filename |
 | `name` | string | User-editable; defaults to "New Kit" |
 | `created_at` | datetime | ISO 8601; set on creation |
 | `modified_at` | datetime | ISO 8601; updated on any change |
@@ -119,11 +119,11 @@ Each entry in a `CatalogueItem`'s `requires` array. Fields used depend on `type`
 
 | Field | Type | Used when |
 |---|---|---|
-| `type` | string | Always — `"item"`, `"category"`, or `"resource"` |
-| `id` | string | `type = "item"` |
-| `category` | string | `type = "category"` |
+| `type` | RequirementType | Always — `"item"`, `"category"`, or `"resource"` |
+| `target_id` | string | `type = "item"` |
+| `target_category` | string | `type = "category"` |
 | `exclude_self` | bool | `type = "category"` — if true, the item itself does not satisfy its own category requirement; defaults to false |
-| `resource` | string | `type = "resource"` — `"water_source"` or `"water_ml"` |
+| `resource` | ResourceType | `type = "resource"` — `"water_source"` or `"water_ml"` |
 | `amount` | int | `type = "resource"`, `resource = "water_ml"` — minimum ml of stored water required |
 
 ### Category
