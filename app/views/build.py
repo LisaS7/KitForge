@@ -33,9 +33,7 @@ def build_screen(
     kit_panel = build_kit_panel(controller)
 
     main_content = ft.Row(
-        controls=[catalogue_panel, middle_panel, kit_panel],
-        expand=True,
-        spacing=styles.SECTION_SPACING,
+        controls=[catalogue_panel, middle_panel, kit_panel], expand=True, spacing=0
     )
 
     return ft.Column(

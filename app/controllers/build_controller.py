@@ -19,7 +19,13 @@ class BuildController:
 
     def select_category(self, category: Category) -> None:
         self.selected_category = category
-        # TODO: finish logic later
+        self.refresh_catalogue()
+        self.page.update()
+
+    def clear_selected_category(self) -> None:
+        self.selected_category = None
+        self.refresh_catalogue()
+        self.page.update()
 
     def add_item(self, item: CatalogueItem) -> None:
         self.kit.add_item(item.id)
@@ -38,7 +44,8 @@ class BuildController:
         self.refresh_all()
 
     def refresh_catalogue(self) -> None:
-        pass
+        if self.catalogue_column is None:
+            return
 
     def refresh_kit(self) -> None:
         if self.kit_column is None:

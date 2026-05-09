@@ -59,12 +59,14 @@ def build_kit_panel(controller: "BuildController") -> ft.Control:  # type: ignor
         content=ft.Column(
             [
                 ft.Text(
-                    "Kit List",
+                    "KIT LIST",
                     size=styles.PANEL_TITLE_SIZE,
                     weight=ft.FontWeight.BOLD,
                 ),
                 controller.kit_column,
             ]
         ),
-        expand=1,
+        width=styles.KIT_PANEL_WIDTH,
+        padding=styles.PANEL_PADDING,
+        bgcolor=styles.BACKGROUND,
     )
