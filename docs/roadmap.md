@@ -16,7 +16,7 @@
 - [x] Create in-memory kit
 - [x] Add item (FR-08)
 - [x] Increment existing item (FR-08)
-- [ ] Decrement/remove item (FR-09, FR-10)
+- [x] Decrement/remove item (FR-09, FR-10)
 - [x] Display packed items list
 
 ---
