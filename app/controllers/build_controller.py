@@ -1,6 +1,7 @@
 import flet as ft
 
 from app.models import CatalogueItem, Category, Kit
+from app.views.catalogue_panel import build_category_grid, build_item_list
 from app.views.kit_panel import build_kit_controls
 
 
@@ -46,6 +47,13 @@ class BuildController:
     def refresh_catalogue(self) -> None:
         if self.catalogue_column is None:
             return
+
+        if self.selected_category is None:
+            self.catalogue_column.controls = [build_category_grid(self)]
+        else:
+            self.catalogue_column.controls = [
+                build_item_list(self, self.selected_category)
+            ]
 
     def refresh_kit(self) -> None:
         if self.kit_column is None:

@@ -66,15 +66,36 @@ def build_category_grid(controller: "BuildController") -> ft.GridView:  # type: 
     )
 
 
+def build_item_list(controller: "BuildController", category: Category) -> ft.Control:  # type: ignore  # noqa: F821
+    items = controller.categories[category]
+
+    return ft.Column(
+        controls=[
+            ft.Button(
+                f"- {category.value}",
+                on_click=lambda e: controller.clear_selected_category(),
+            ),
+            *[
+                ft.Container(
+                    content=ft.Text(item.name),
+                    on_click=handle_add_item(controller, item),
+                    padding=styles.TILE_PADDING,
+                    border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
+                    bgcolor=styles.BACKGROUND,
+                )
+                for item in items
+            ],
+        ]
+    )
+
+
 def build_catalogue_panel(controller: "BuildController") -> ft.Control:  # type: ignore  # noqa: F821
+    controller.catalogue_column = ft.Column(
+        controls=[build_category_grid(controller)], scroll=ft.ScrollMode.AUTO
+    )
 
     return ft.Container(
-        content=ft.Column(
-            controls=[
-                build_category_grid(controller),
-            ],
-            scroll=ft.ScrollMode.AUTO,
-        ),
+        content=controller.catalogue_column,
         width=styles.CATALOGUE_WIDTH,
         padding=styles.PANEL_PADDING,
         bgcolor=styles.SURFACE,
