@@ -101,18 +101,11 @@ class Kit(BaseModel):
         )
 
     def add_item(self, item_id: str):
-        existing = next((i for i in self.items if i.item_id == item_id), None)
-
-        if existing:
-            existing.qty += 1
-            logger.debug(
-                "Incremented %s to qty %d in kit %s", item_id, existing.qty, self.id
-            )
+        if any(i.item_id == item_id for i in self.items):
+            self.increment_item(item_id)
         else:
             self.items.append(KitItem(item_id=item_id, qty=1))
-            logger.debug("Added %s to kit %s", item_id, self.id)
-
-        self.modified_at = dt.datetime.now(dt.timezone.utc)
+            self.modified_at = dt.datetime.now(dt.timezone.utc)
 
     def remove_item(self, item_id: str):
         self.items = [item for item in self.items if item.item_id != item_id]

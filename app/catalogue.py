@@ -1,5 +1,6 @@
 import json
 import logging
+from collections import defaultdict
 
 from .config import CATALOGUE_PATH
 from .models import CatalogueItem, Category
@@ -16,14 +17,7 @@ def load_catalogue() -> list[CatalogueItem]:
 
 
 def group_by_category(data: list[CatalogueItem]) -> dict[Category, list[CatalogueItem]]:
-    categories = {}
-
+    categories = defaultdict(list)
     for item in data:
-        category = item.category
-
-        if category not in categories:
-            categories[category] = []
-
-        categories[category].append(item)
-
-    return categories
+        categories[item.category].append(item)
+    return dict(categories)
