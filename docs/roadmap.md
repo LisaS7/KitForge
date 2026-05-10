@@ -24,19 +24,20 @@
 ## Phase 3: Build Screen Layout & Styling
 **Goal: Match wireframe structure and visual language**
 
-- [ ] Refactor `build.py` into 3-panel layout (catalogue / centre / packed items)
-- [ ] Split into component files: `catalogue_panel.py`, `centre_panel.py`, `kit_panel.py`
-- [ ] Add category metadata (icons, priority) to `models.py` or a constants module
-- [ ] Khaki header bar with kit name and action buttons (Configure / Build)
-- [ ] Panel titles: uppercase, small, letter-spaced (`CATALOGUE`, `PACKED ITEMS`)
-- [ ] Hard 2px dark borders between panels (matching wireframe)
-- [ ] Category icon grid in catalogue panel (2-column, square cards)
-- [ ] Catalogue view state: category grid → item grid → back button (FR-06)
-- [ ] Bag area: centred 🎒 with dashed border and drop hint
+- [x] Refactor `build.py` into 3-panel layout (catalogue / centre / packed items)
+- [x] Split into component files: `catalogue_panel.py`, `centre_panel.py`, `kit_panel.py`
+- [x] Add category metadata (icons) to `icons.py` constants module
+- [x] Khaki header bar with kit name and action buttons (Configure / Build)
+- [x] Panel titles: uppercase (`CATALOGUE`, `KIT LIST`)
+- [x] Hard borders between panels (right-side separators)
+- [x] Category icon grid in catalogue panel (square tiles, GridView)
+- [x] Catalogue view state: category grid → item grid → back button (FR-06)
+- [x] Bag area: centred image with drop hint
 - [ ] Stats bar shell: weight, calories, water, duration, readiness score (layout only)
 - [ ] Packed items grouped by category with collapsible headers (FR-11)
 - [ ] Compact qty controls (small −/+ buttons, no icon buttons)
-- [ ] Update `styles.py` with missing tokens: `KHAKI`, `PANEL_TITLE_STYLE`, `MUTED`, `SUCCESS`
+- [x] Update `styles.py` with layout tokens: `CATALOGUE_WIDTH`, `KIT_PANEL_WIDTH`, `TILE_SIZE`, `ICON_SIZE`
+- [ ] Update `styles.py` with remaining tokens: `KHAKI`, `SUCCESS`
 
 ---
 

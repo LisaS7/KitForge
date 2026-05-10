@@ -14,24 +14,24 @@
 
 ## Build Screen Layout & Styling
 
-- [ ] Refactor `build.py` into 3-panel layout: catalogue (fixed 220px) / centre (flex) / packed items (fixed 240px)
-- [ ] Split into `catalogue_panel.py`, `centre_panel.py`, `kit_panel.py`
-- [ ] Add `CATEGORY_METADATA` dict mapping `Category` → `{icon, priority}` (required/warning/optional)
-- [ ] Header: khaki background, kit name field (dashed border), Configure and Build buttons right-aligned
-- [ ] Panel titles: uppercase, 12px, letter-spaced, surface background, bottom border
-- [ ] Hard 2px dark borders between all panels (left/right separators)
-- [ ] Update `styles.py`: add `KHAKI`, `SUCCESS`, `PANEL_TITLE_STYLE`, `LABEL_STYLE`
-- [ ] Bag area: centred 🎒 icon, dashed border container, "Drag items here" hint text
+- [x] Refactor `build.py` into 3-panel layout: catalogue (fixed 240px) / centre (flex) / packed items (fixed 240px)
+- [x] Split into `catalogue_panel.py`, `middle_panel.py`, `kit_panel.py`
+- [x] Add `CATEGORY_ICONS` dict mapping `Category` → Flet icon (in `icons.py`)
+- [x] Header: khaki background, kit name field (dashed border), Configure and Build buttons right-aligned
+- [x] Panel titles: uppercase (`CATALOGUE`, `KIT LIST`)
+- [x] Right-side border separators between panels (`border.only`)
+- [x] Update `styles.py`: add `CATALOGUE_WIDTH`, `KIT_PANEL_WIDTH`, `TILE_SIZE`, `ICON_SIZE`- [ ] Update `styles.py`: add `KHAKI`, `SUCCESS`
+- [x] Bag area: centred image, "Drag items here" hint text, contained in middle panel
 - [ ] Stats bar shell: weight (with bar), calories, water, duration, readiness — layout only, no live data yet
 
 ---
 
 ## Catalogue Browsing
 
-- [ ] FR-06: Category icon grid — 2-column, square cards with icon + label
+- [x] FR-06: Category icon grid — square tiles with icon + label (GridView)
 - [ ] FR-06: Warning indicator (⚠) on category cards for uncovered categories
-- [ ] FR-06: Click category → item grid view (2-column cards with icon + label)
-- [ ] FR-06: Back button returns to category grid
+- [x] FR-06: Click category → item grid view (2-column cards with icon + label)
+- [x] FR-06: Back button returns to category grid
 - [ ] FR-07: Item tooltip showing weight, calories, water, notes
 
 ---
