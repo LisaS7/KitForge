@@ -27,14 +27,14 @@ def category_tile(category: Category, on_click) -> ft.Container:
     return ft.Container(
         width=styles.TILE_SIZE,
         height=styles.TILE_SIZE,
-        padding=styles.ITEM_SPACING,
+        padding=styles.TILE_PADDING,
         bgcolor=styles.BACKGROUND,
         border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
         on_click=on_click,
         content=ft.Column(
             controls=[
                 ft.Icon(
-                    CATEGORY_ICONS[category], size=styles.ICON_SIZE, color=styles.TEXT
+                    CATEGORY_ICONS[category], size=styles.ICON_SIZE, color=styles.TEXT  # type: ignore
                 ),
                 ft.Text(
                     category.value,
@@ -71,9 +71,6 @@ def build_catalogue_panel(controller: "BuildController") -> ft.Control:  # type:
     return ft.Container(
         content=ft.Column(
             controls=[
-                ft.Text(
-                    "CATALOGUE", size=styles.PANEL_TITLE_SIZE, weight=ft.FontWeight.BOLD
-                ),
                 build_category_grid(controller),
             ],
             scroll=ft.ScrollMode.AUTO,

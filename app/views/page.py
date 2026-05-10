@@ -7,7 +7,6 @@ def configure_page(page: ft.Page) -> None:
     page.title = "KitForge"
     page.window.width = 1200
     page.window.height = 800
-    page.padding = styles.PAGE_PADDING
     page.bgcolor = styles.BACKGROUND
     page.theme = ft.Theme(
         color_scheme=ft.ColorScheme(

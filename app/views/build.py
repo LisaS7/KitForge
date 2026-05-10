@@ -9,16 +9,24 @@ from ..models import CatalogueItem, Category, Kit
 from . import styles
 
 
-def build_header() -> ft.Control:
-    return ft.Column(
-        [
-            ft.Text(
-                "KitForge",
-                size=styles.TITLE_SIZE,
-                weight=ft.FontWeight.BOLD,
-            ),
-            ft.Text("Emergency kit planner"),
-        ]
+def build_header() -> ft.Container:
+    return ft.Container(
+        bgcolor=styles.ACCENT,
+        border=ft.border.only(bottom=ft.BorderSide(styles.BORDER_WIDTH, styles.TEXT)),
+        padding=styles.PANEL_PADDING,
+        content=ft.Row(
+            controls=[
+                ft.Text(
+                    "New Kit",
+                    size=styles.TITLE_SIZE,
+                    weight=ft.FontWeight.BOLD,
+                ),
+                ft.Container(expand=True),
+                ft.Button("Configure Kit"),
+                ft.Button("Build"),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+        ),
     )
 
 
@@ -37,5 +45,5 @@ def build_screen(
     )
 
     return ft.Column(
-        controls=[header, main_content], expand=True, spacing=styles.SECTION_SPACING
+        controls=[header, main_content], expand=True, spacing=0
     )
