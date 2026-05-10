@@ -5,8 +5,8 @@ from app.views import styles
 
 def build_middle_panel(controller: "BuildController") -> ft.Container:  # type: ignore  # noqa: F821
     bag_dropzone = ft.Container(
-        width=280,
-        height=360,
+        width=styles.MIDDLE_WIDTH,
+        height=styles.MIDDLE_HEIGHT,
         border=ft.Border.all(styles.BORDER_WIDTH, styles.BORDER),
         content=ft.Column(
             controls=[
