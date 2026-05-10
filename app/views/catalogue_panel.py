@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 import flet as ft
 
 from app.views.icons import CATEGORY_ICONS
@@ -5,15 +7,18 @@ from app.views.icons import CATEGORY_ICONS
 from ..models import CatalogueItem, Category
 from . import styles
 
+if TYPE_CHECKING:
+    from app.controllers.build_controller import BuildController
 
-def handle_add_item(controller: "BuildController", item: CatalogueItem):  # type: ignore  # noqa: F821
+
+def handle_add_item(controller: "BuildController", item: CatalogueItem):
     def on_click(e):
         controller.add_item(item)
 
     return on_click
 
 
-def handle_select_category(controller: "BuildController", category: Category):  # type: ignore  # noqa: F821
+def handle_select_category(controller: "BuildController", category: Category):
     def on_click(e):
         controller.select_category(category)
 
@@ -34,7 +39,7 @@ def category_tile(category: Category, on_click) -> ft.Container:
         content=ft.Column(
             controls=[
                 ft.Icon(
-                    CATEGORY_ICONS[category], size=styles.ICON_SIZE, color=styles.TEXT  # type: ignore
+                    CATEGORY_ICONS[category], size=styles.ICON_SIZE, color=styles.TEXT
                 ),
                 ft.Text(
                     category.value,
@@ -49,7 +54,7 @@ def category_tile(category: Category, on_click) -> ft.Container:
     )
 
 
-def build_category_grid(controller: "BuildController") -> ft.GridView:  # type: ignore  # noqa: F821
+def build_category_grid(controller: "BuildController") -> ft.GridView:
     # return a grid of cat buttons
     return ft.GridView(
         controls=[
@@ -66,7 +71,7 @@ def build_category_grid(controller: "BuildController") -> ft.GridView:  # type: 
     )
 
 
-def build_item_list(controller: "BuildController", category: Category) -> ft.Control:  # type: ignore  # noqa: F821
+def build_item_list(controller: "BuildController", category: Category) -> ft.Control:
     items = controller.categories[category]
 
     return ft.Column(
@@ -89,7 +94,7 @@ def build_item_list(controller: "BuildController", category: Category) -> ft.Con
     )
 
 
-def build_catalogue_panel(controller: "BuildController") -> ft.Control:  # type: ignore  # noqa: F821
+def build_catalogue_panel(controller: "BuildController") -> ft.Control:
     controller.catalogue_column = ft.Column(
         controls=[build_category_grid(controller)], scroll=ft.ScrollMode.AUTO
     )

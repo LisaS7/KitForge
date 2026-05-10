@@ -1,9 +1,14 @@
+from typing import TYPE_CHECKING
+
 import flet as ft
 
 from app.views import styles
 
+if TYPE_CHECKING:
+    from app.controllers.build_controller import BuildController
 
-def build_middle_panel(controller: "BuildController") -> ft.Container:  # type: ignore  # noqa: F821
+
+def build_middle_panel(controller: "BuildController") -> ft.Container:
     bag_dropzone = ft.Container(
         width=styles.MIDDLE_WIDTH,
         height=styles.MIDDLE_HEIGHT,
