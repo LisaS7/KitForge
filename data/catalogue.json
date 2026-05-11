@@ -140,7 +140,7 @@
     },
     {
       "id": "trail_mix",
-      "name": "Trail Mix (200g)",
+      "name": "Trail Mix",
       "category": "Food",
       "weight_g": 200,
       "calories": 900,
@@ -152,7 +152,7 @@
     },
     {
       "id": "jerky",
-      "name": "Jerky (100g)",
+      "name": "Jerky",
       "category": "Food",
       "weight_g": 100,
       "calories": 350,
@@ -436,7 +436,7 @@
     },
     {
       "id": "gas_canister",
-      "name": "Gas Canister (100g)",
+      "name": "Gas Canister",
       "category": "Fire",
       "weight_g": 200,
       "calories": 0,
