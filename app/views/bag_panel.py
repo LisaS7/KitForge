@@ -30,14 +30,8 @@ def build_middle_panel(controller: "BuildController") -> ft.Container:
     )
 
     return ft.Container(
-        expand=True,
+        expand=1,
         bgcolor=styles.BACKGROUND,
-        border=ft.border.only(
-            right=ft.BorderSide(styles.BORDER_WIDTH, styles.BORDER),
-        ),
-        content=ft.Column(
-            controls=[bag_dropzone],
-            alignment=ft.MainAxisAlignment.CENTER,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        ),
+        alignment=ft.Alignment.CENTER,
+        content=bag_dropzone,
     )

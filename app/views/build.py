@@ -1,9 +1,10 @@
 import flet as ft
 
 from app.controllers.build_controller import BuildController
+from app.views.bag_panel import build_middle_panel
 from app.views.catalogue_panel import build_catalogue_panel
 from app.views.kit_panel import build_kit_panel
-from app.views.middle_panel import build_middle_panel
+from app.views.stats_panel import build_stats_panel
 
 from ..models import CatalogueItem, Category, Kit
 from . import styles
@@ -31,19 +32,33 @@ def build_header() -> ft.Container:
 
 
 def build_screen(
-    page: ft.Page, categories: dict[Category, list[CatalogueItem]], kit: Kit
+    page: ft.Page,
+    categories: dict[Category, list[CatalogueItem]],
+    catalogue_lookup: dict[str, CatalogueItem],
+    kit: Kit,
 ) -> ft.Control:
-    controller = BuildController(page, kit, categories)
+    controller = BuildController(page, kit, categories, catalogue_lookup)
 
     header = build_header()
     catalogue_panel = build_catalogue_panel(controller)
-    middle_panel = build_middle_panel(controller)
+    bag_panel = build_middle_panel(controller)
+    stats_panel = build_stats_panel(controller)
     kit_panel = build_kit_panel(controller)
 
-    main_content = ft.Row(
-        controls=[catalogue_panel, middle_panel, kit_panel], expand=True, spacing=0
+    middle_panel = ft.Container(
+        expand=True,
+        border=ft.border.only(right=ft.BorderSide(styles.BORDER_WIDTH, styles.BORDER)),
+        content=ft.Column(controls=[bag_panel, stats_panel], expand=True, spacing=0),
     )
 
-    return ft.Column(
-        controls=[header, main_content], expand=True, spacing=0
+    main_content = ft.Row(
+        controls=[
+            catalogue_panel,
+            middle_panel,
+            kit_panel,
+        ],
+        expand=True,
+        spacing=0,
     )
+    controller.refresh_stats()
+    return ft.Column(controls=[header, main_content], expand=True, spacing=0)

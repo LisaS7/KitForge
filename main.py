@@ -28,6 +28,7 @@ def main(page: ft.Page) -> None:
 
     data = load_catalogue()
     categories = group_by_category(data)
+    catalogue_lookup = {item.id: item for item in data}
 
     kit_config = KitConfig(
         weight_limit_g=25000,
@@ -39,7 +40,7 @@ def main(page: ft.Page) -> None:
     )
     kit = Kit.create("Test Kit", kit_config)
 
-    build_view = build_screen(page, categories, kit)
+    build_view = build_screen(page, categories, catalogue_lookup, kit)
 
     page.add(build_view)
 

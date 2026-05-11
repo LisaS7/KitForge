@@ -1,22 +1,30 @@
 import flet as ft
 
 from app.models import CatalogueItem, Category, Kit
+from app.stats import KitStats
 from app.views.catalogue_panel import build_category_grid, build_item_list
 from app.views.kit_panel import build_kit_controls
+from app.views.stats_panel import build_stats_controls
 
 
 class BuildController:
     def __init__(
-        self, page: ft.Page, kit: Kit, categories: dict[Category, list[CatalogueItem]]
+        self,
+        page: ft.Page,
+        kit: Kit,
+        categories: dict[Category, list[CatalogueItem]],
+        catalogue_lookup: dict[str, CatalogueItem],
     ):
         self.page = page
         self.kit = kit
         self.categories = categories
+        self.catalogue_lookup = catalogue_lookup
         self.selected_category: Category | None = None
 
         self.catalogue_column: ft.Column | None = None
         self.kit_column: ft.Column | None = None
         self.bag_area: ft.Control | None = None
+        self.stats_panel: ft.Control | None = None
 
     def select_category(self, category: Category) -> None:
         self.selected_category = category
@@ -61,7 +69,10 @@ class BuildController:
         self.kit_column.controls = build_kit_controls(self)
 
     def refresh_stats(self) -> None:
-        pass
+        if self.stats_panel is None:
+            return
+        stats = KitStats.calculate_stats(self.kit, self.catalogue_lookup)
+        self.stats_panel.content.controls = build_stats_controls(stats)  # type: ignore
 
     def refresh_all(self) -> None:
         self.refresh_catalogue()
