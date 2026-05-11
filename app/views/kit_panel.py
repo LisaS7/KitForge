@@ -30,18 +30,18 @@ def handle_remove(controller: "BuildController", item_id: str):
 
 
 def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
-    kit = controller.kit
-    if not kit.items:
+    if not controller.kit.items:
         return [ft.Text("No items packed yet!", italic=True)]
 
     controls: list[ft.Control] = []
 
-    for item in kit.items:
+    for item in controller.kit.items:
+        catalogue_item = controller.get_catalogue_item(item.item_id)
         controls.append(
             ft.Row(
                 controls=[
                     # TODO: replace item id with item name
-                    ft.Text(f"{item.item_id} x {item.qty}"),
+                    ft.Text(f"{catalogue_item.name} x {item.qty}"),
                     ft.IconButton(
                         icon=ft.Icons.REMOVE,
                         on_click=handle_decrement(controller, item.item_id),

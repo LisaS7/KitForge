@@ -26,6 +26,9 @@ class BuildController:
         self.bag_area: ft.Control | None = None
         self.stats_panel: ft.Control | None = None
 
+    def get_catalogue_item(self, item_id: str) -> CatalogueItem:
+        return self.catalogue_lookup[item_id]
+
     def select_category(self, category: Category) -> None:
         self.selected_category = category
         self.refresh_catalogue()
