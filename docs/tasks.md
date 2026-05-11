@@ -22,7 +22,7 @@
 - [x] Right-side border separators between panels (`border.only`)
 - [x] Update `styles.py`: add `CATALOGUE_WIDTH`, `KIT_PANEL_WIDTH`, `TILE_SIZE`, `ICON_SIZE`- [ ] Update `styles.py`: add `KHAKI`, `SUCCESS`
 - [x] Bag area: centred image, "Drag items here" hint text, contained in middle panel
-- [ ] Stats bar shell: weight (with bar), calories, water, duration, readiness — layout only, no live data yet
+- [x] Stats bar shell: weight (with bar), calories, water, duration, readiness — layout only, no live data yet
 
 ---
 
@@ -69,8 +69,8 @@
 ## Stats
 
 - [ ] FR-13: Weight bar — fill proportion vs limit; green <75%, amber 75–99%, red ≥100%
-- [ ] FR-14: Stats service — `get_total_weight()`, `get_calories()`, `get_water_ml()`, `get_readiness_score()`
-- [ ] FR-14: Wire stats into stats bar (live update on add/remove)
+- [x] FR-14: Stats service — `get_total_weight()`, `get_calories()`, `get_water_ml()`, `get_readiness_score()`
+- [x] FR-14: Wire stats into stats bar (live update on add/remove)
 - [ ] FR-14: Calories and water shown as fraction of requirement (people × duration)
 - [ ] FR-14b: Warning indicator on category cards for uncovered categories (live)
 
