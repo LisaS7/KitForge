@@ -29,6 +29,18 @@ def handle_remove(controller: "BuildController", item_id: str):
     return on_click
 
 
+def build_qty_button(text: str, on_click) -> ft.Control:
+    return ft.Container(
+        content=ft.Text(text, size=12),
+        width=22,
+        height=22,
+        alignment=ft.Alignment(0, 0),
+        border=ft.border.all(1, styles.BORDER),
+        bgcolor=styles.SURFACE,
+        on_click=on_click,
+    )
+
+
 def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
     if not controller.kit.items:
         return [ft.Text("No items packed yet!", italic=True)]
@@ -40,19 +52,13 @@ def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
         controls.append(
             ft.Row(
                 controls=[
-                    # TODO: replace item id with item name
-                    ft.Text(f"{catalogue_item.name} x {item.qty}"),
-                    ft.IconButton(
-                        icon=ft.Icons.REMOVE,
-                        on_click=handle_decrement(controller, item.item_id),
+                    ft.Text(catalogue_item.name, expand=True, size=12),
+                    build_qty_button("−", handle_decrement(controller, item.item_id)),
+                    ft.Text(
+                        str(item.qty), width=20, text_align=ft.TextAlign.CENTER, size=12
                     ),
-                    ft.IconButton(
-                        icon=ft.Icons.ADD,
-                        on_click=handle_increment(controller, item.item_id),
-                    ),
-                    ft.TextButton(
-                        "Remove", on_click=handle_remove(controller, item.item_id)
-                    ),
+                    build_qty_button("+", handle_increment(controller, item.item_id)),
+                    build_qty_button("×", handle_remove(controller, item.item_id)),
                 ]
             )
         )
