@@ -26,9 +26,6 @@ def handle_select_category(controller: "BuildController", category: Category):
 
 
 def category_tile(category: Category, on_click) -> ft.Container:
-    # return a clickable category tile
-    # category, icon, click handler
-    # styling
     return ft.Container(
         width=styles.TILE_SIZE,
         height=styles.TILE_SIZE,
@@ -54,8 +51,17 @@ def category_tile(category: Category, on_click) -> ft.Container:
     )
 
 
+def item_tile(item: CatalogueItem, on_click) -> ft.Container:
+    return ft.Container(
+        content=ft.Text(item.name, size=styles.BODY_SIZE),
+        on_click=on_click,
+        padding=styles.TILE_PADDING,
+        border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
+        bgcolor=styles.BACKGROUND,
+    )
+
+
 def build_category_grid(controller: "BuildController") -> ft.GridView:
-    # return a grid of cat buttons
     return ft.GridView(
         controls=[
             category_tile(
@@ -74,20 +80,19 @@ def build_category_grid(controller: "BuildController") -> ft.GridView:
 def build_item_list(controller: "BuildController", category: Category) -> ft.Control:
     items = controller.categories[category]
 
+    back_button = ft.Container(
+        content=ft.Text(f"← {category.value}", size=styles.BODY_SIZE),
+        on_click=lambda e: controller.clear_selected_category(),
+        padding=styles.PANEL_PADDING,
+        bgcolor=styles.SURFACE,
+        border=ft.border.only(bottom=ft.BorderSide(styles.BORDER_WIDTH, styles.BORDER)),
+    )
+
     return ft.Column(
         controls=[
-            ft.Button(
-                f"- {category.value}",
-                on_click=lambda e: controller.clear_selected_category(),
-            ),
+            back_button,
             *[
-                ft.Container(
-                    content=ft.Text(item.name),
-                    on_click=handle_add_item(controller, item),
-                    padding=styles.TILE_PADDING,
-                    border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
-                    bgcolor=styles.BACKGROUND,
-                )
+                item_tile(item, on_click=handle_add_item(controller, item))
                 for item in items
             ],
         ]
