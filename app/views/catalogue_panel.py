@@ -52,8 +52,29 @@ def category_tile(category: Category, on_click) -> ft.Container:
 
 
 def item_tile(item: CatalogueItem, on_click) -> ft.Container:
+    item_name = ft.Text(
+        item.name, size=styles.LABEL_SIZE, text_align=ft.TextAlign.CENTER
+    )
+    item_weight = ft.Text(
+        f"{item.weight_g}g",
+        size=styles.LABEL_SIZE,
+        color=styles.MUTED_TEXT,
+        text_align=ft.TextAlign.CENTER,
+    )
+
     return ft.Container(
-        content=ft.Text(item.name, size=styles.BODY_SIZE),
+        content=ft.Column(
+            controls=[
+                item_name,
+                item_weight,
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            spacing=2,
+        ),
+        height=styles.TILE_SIZE,
+        width=styles.TILE_SIZE,
+        ink=True,
         on_click=on_click,
         padding=styles.TILE_PADDING,
         border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
@@ -69,11 +90,12 @@ def build_category_grid(controller: "BuildController") -> ft.GridView:
             )
             for category in controller.categories
         ],  # type: ignore
-        runs_count=3,
+        runs_count=2,
         max_extent=100,
         child_aspect_ratio=1,
         spacing=styles.ITEM_SPACING,
         run_spacing=styles.ITEM_SPACING,
+        padding=styles.PANEL_PADDING,
     )
 
 
@@ -88,15 +110,31 @@ def build_item_list(controller: "BuildController", category: Category) -> ft.Con
         border=ft.border.only(bottom=ft.BorderSide(styles.BORDER_WIDTH, styles.BORDER)),
     )
 
-    return ft.Column(
+    item_grid = ft.GridView(
         controls=[
-            back_button,
-            *[
-                item_tile(item, on_click=handle_add_item(controller, item))
-                for item in items
-            ],
-        ]
+            item_tile(item, on_click=handle_add_item(controller, item))
+            for item in items
+        ],
+        runs_count=3,
+        max_extent=100,
+        child_aspect_ratio=1,
+        spacing=styles.ITEM_SPACING,
+        run_spacing=styles.ITEM_SPACING,
+        padding=styles.PANEL_PADDING,
     )
+
+    help_note = ft.Container(
+        ft.Text(
+            # TODO: change helper text once drag & drop is done
+            "Click item to add",
+            size=styles.LABEL_SIZE,
+            color=styles.MUTED_TEXT,
+            italic=True,
+        ),
+        padding=styles.PANEL_PADDING,
+    )
+
+    return ft.Column(controls=[back_button, item_grid, help_note])
 
 
 def build_catalogue_panel(controller: "BuildController") -> ft.Control:
