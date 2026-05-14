@@ -41,25 +41,89 @@ def build_qty_button(text: str, on_click) -> ft.Control:
     )
 
 
+def build_packed_item_row(controller: "BuildController", item) -> ft.Control:
+    catalogue_item = controller.get_catalogue_item(item.item_id)
+
+    return ft.Container(
+        content=ft.Row(
+            controls=[
+                ft.Text(catalogue_item.name, expand=True, size=12),
+                build_qty_button("−", handle_decrement(controller, item.item_id)),
+                ft.Text(
+                    str(item.qty), width=20, text_align=ft.TextAlign.CENTER, size=12
+                ),
+                build_qty_button("+", handle_increment(controller, item.item_id)),
+                build_qty_button("×", handle_remove(controller, item.item_id)),
+            ]
+        ),
+        padding=6,
+        border=ft.border.only(bottom=ft.BorderSide(1, styles.BORDER)),
+    )
+
+
+def group_items_by_category(controller: "BuildController") -> dict:
+    grouped = {}
+
+    for item in controller.kit.items:
+        catalogue_item = controller.get_catalogue_item(item.item_id)
+        category = catalogue_item.category
+
+        if category not in grouped:
+            grouped[category] = []
+
+        grouped[category].append(item)
+
+    return grouped
+
+
 def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
     if not controller.kit.items:
         return [ft.Text("No items packed yet!", italic=True)]
 
     controls: list[ft.Control] = []
 
-    for item in controller.kit.items:
-        catalogue_item = controller.get_catalogue_item(item.item_id)
+    grouped_items = group_items_by_category(controller)
+
+    for category, items in grouped_items.items():
+        is_collapsed = category in controller.collapsed_categories
+
+        section_controls = [
+            ft.Container(
+                content=ft.Row(
+                    controls=[
+                        ft.Text(
+                            "▸" if is_collapsed else "▾",
+                            size=12,
+                        ),
+                        ft.Text(
+                            category.value,
+                            size=14,
+                            weight=ft.FontWeight.BOLD,
+                        ),
+                    ],
+                    spacing=6,
+                ),
+                padding=8,
+                bgcolor=styles.SURFACE,
+                on_click=lambda e, c=category: controller.toggle_category(c),
+            )
+        ]
+
+        if not is_collapsed:
+            for item in items:
+                section_controls.append(build_packed_item_row(controller, item))  # type: ignore
         controls.append(
-            ft.Row(
-                controls=[
-                    ft.Text(catalogue_item.name, expand=True, size=12),
-                    build_qty_button("−", handle_decrement(controller, item.item_id)),
-                    ft.Text(
-                        str(item.qty), width=20, text_align=ft.TextAlign.CENTER, size=12
-                    ),
-                    build_qty_button("+", handle_increment(controller, item.item_id)),
-                    build_qty_button("×", handle_remove(controller, item.item_id)),
-                ]
+            ft.Container(
+                content=ft.Column(
+                    controls=section_controls,  # type: ignore
+                    spacing=0,
+                ),
+                border=ft.border.only(
+                    bottom=ft.BorderSide(
+                        styles.BORDER_WIDTH,
+                        styles.BORDER,
+                    )
+                ),
             )
         )
 

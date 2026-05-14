@@ -20,6 +20,7 @@ class BuildController:
         self.categories = categories
         self.catalogue_lookup = catalogue_lookup
         self.selected_category: Category | None = None
+        self.collapsed_categories: set[Category] = set()
 
         self.catalogue_column: ft.Column | None = None
         self.kit_column: ft.Column | None = None
@@ -37,6 +38,15 @@ class BuildController:
     def clear_selected_category(self) -> None:
         self.selected_category = None
         self.refresh_catalogue()
+        self.page.update()
+
+    def toggle_category(self, category: Category) -> None:
+        if category in self.collapsed_categories:
+            self.collapsed_categories.remove(category)
+        else:
+            self.collapsed_categories.add(category)
+
+        self.refresh_kit()
         self.page.update()
 
     def add_item(self, item: CatalogueItem) -> None:
