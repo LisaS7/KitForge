@@ -34,7 +34,7 @@
 - [x] Catalogue view state: category grid → item grid → back button (FR-06)
 - [x] Bag area: centred image with drop hint
 - [x] Stats bar shell: weight, calories, water, duration, readiness score (layout only)
-- [ ] Packed items grouped by category with collapsible headers (FR-11)
+- [x] Packed items grouped by category with collapsible headers (FR-11)
 - [x] Compact qty controls (small −/+ buttons, no icon buttons)
 - [x] Update `styles.py` with layout tokens: `CATALOGUE_WIDTH`, `KIT_PANEL_WIDTH`, `TILE_SIZE`, `ICON_SIZE`
 
@@ -45,7 +45,7 @@
 
 - [x] Stats service: `get_total_weight()`, `get_calories()`, `get_water_ml()` (FR-14)
 - [x] Wire stats into stats bar (live update on add/remove)
-- [ ] Weight bar with colour thresholds: green <75%, amber 75–99%, red ≥100% (FR-13)
+- [x] Weight bar with colour thresholds: green <75%, amber 75–99%, red ≥100% (FR-13)
 - [ ] Calories and water shown as fraction of requirement (people × duration) (FR-14)
 - [ ] Warning indicator on category cards for uncovered categories (FR-14b)
 
