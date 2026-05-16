@@ -2,6 +2,7 @@ from typing import TYPE_CHECKING
 
 import flet as ft
 
+from app.models import Category, KitItem
 from app.views import styles
 
 if TYPE_CHECKING:
@@ -61,7 +62,9 @@ def build_packed_item_row(controller: "BuildController", item) -> ft.Control:
     )
 
 
-def group_items_by_category(controller: "BuildController") -> dict:
+def group_items_by_category(
+    controller: "BuildController",
+) -> dict[Category, list[KitItem]]:
     grouped = {}
 
     for item in controller.kit.items:
