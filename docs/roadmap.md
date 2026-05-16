@@ -47,7 +47,7 @@
 - [x] Wire stats into stats bar (live update on add/remove)
 - [x] Weight bar with colour thresholds: green <75%, amber 75–99%, red ≥100% (FR-13)
 - [x] Calories and water shown as fraction of requirement (people × duration) (FR-14)
-- [ ] Warning indicator on category cards for uncovered categories (FR-14b)
+- [x] Warning indicator on category cards for uncovered categories (FR-14b)
 
 ---
 

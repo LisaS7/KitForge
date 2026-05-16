@@ -25,7 +25,24 @@ def handle_select_category(controller: "BuildController", category: Category):
     return on_click
 
 
-def category_tile(category: Category, on_click) -> ft.Container:
+def category_tile(category: Category, on_click, is_covered: bool) -> ft.Container:
+    label_controls: list[ft.Control] = [
+        ft.Text(
+            category.value,
+            size=styles.LABEL_SIZE,
+            text_align=ft.TextAlign.CENTER,
+        )
+    ]
+
+    if not is_covered:
+        label_controls.append(
+            ft.Icon(
+                ft.Icons.WARNING_ROUNDED,
+                size=styles.LABEL_SIZE,
+                color=styles.WARNING,
+            )
+        )
+
     return ft.Container(
         width=styles.TILE_SIZE,
         height=styles.TILE_SIZE,
@@ -36,12 +53,14 @@ def category_tile(category: Category, on_click) -> ft.Container:
         content=ft.Column(
             controls=[
                 ft.Icon(
-                    CATEGORY_ICONS[category], size=styles.ICON_SIZE, color=styles.TEXT
+                    CATEGORY_ICONS[category],
+                    size=styles.ICON_SIZE,
+                    color=styles.TEXT,
                 ),
-                ft.Text(
-                    category.value,
-                    size=styles.LABEL_SIZE,
-                    text_align=ft.TextAlign.CENTER,
+                ft.Row(
+                    controls=label_controls,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    spacing=2,
                 ),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -86,7 +105,9 @@ def build_category_grid(controller: "BuildController") -> ft.GridView:
     return ft.GridView(
         controls=[
             category_tile(
-                category, on_click=handle_select_category(controller, category)
+                category,
+                on_click=handle_select_category(controller, category),
+                is_covered=controller.is_category_covered(category),
             )
             for category in controller.categories
         ],  # type: ignore

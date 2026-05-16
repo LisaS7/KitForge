@@ -49,6 +49,12 @@ class BuildController:
         self.refresh_kit()
         self.page.update()
 
+    def is_category_covered(self, category: Category) -> bool:
+        return any(
+            self.catalogue_lookup[kit_item.item_id].category == category
+            for kit_item in self.kit.items
+        )
+
     def add_item(self, item: CatalogueItem) -> None:
         self.kit.add_item(item.id)
         self.refresh_all()
