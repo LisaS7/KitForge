@@ -79,15 +79,26 @@
 **Goal: Identify gaps in kit coverage**
 
 - [ ] Readiness score calculation — weighted category coverage (FR-16)
-- [ ] Score live in stats bar and full display on report screen (FR-16)
+- [ ] Score live in stats bar (FR-16)
 - [ ] Missing category list ordered Required → Warning → Optional (FR-17)
 - [ ] Dependency warnings per packed item (FR-18)
 - [ ] `water_source` shown as informational note, not warning (FR-18)
-- [ ] Readiness Report screen (FR-15)
 
 ---
 
-## Phase 8: UX Polish
+## Phase 8: Readiness Report Screen
+**Goal: Dedicated view for full readiness breakdown**
+
+- [ ] Screen routing to Report view (FR-15)
+- [ ] "Build" button saves kit and navigates to report (FR-15)
+- [ ] Back/edit button returns to build screen (FR-15)
+- [ ] Full readiness score display (FR-16)
+- [ ] Missing categories section (FR-17)
+- [ ] Dependency warnings section (FR-18)
+
+---
+
+## Phase 9: UX Polish
 **Goal: Smooth, complete experience**
 
 - [ ] Item tooltips: weight, calories, water, notes (FR-07)
