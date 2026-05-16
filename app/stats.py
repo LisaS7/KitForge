@@ -2,6 +2,16 @@ from dataclasses import dataclass
 
 from app.models import CatalogueItem, Kit
 
+ADULT_CALORIES_PER_DAY = 2000
+CHILD_CALORIES_PER_DAY = 1500
+YOUNG_CHILD_CALORIES_PER_DAY = 1200
+INFANT_CALORIES_PER_DAY = 700
+
+ADULT_WATER_ML_PER_DAY = 3000
+CHILD_WATER_ML_PER_DAY = 2000
+YOUNG_CHILD_WATER_ML_PER_DAY = 1500
+INFANT_WATER_ML_PER_DAY = 1000
+
 
 @dataclass(slots=True)
 class KitStats:
@@ -24,6 +34,12 @@ class KitStats:
 
     def weight_limit_kg(self) -> float:
         return self.weight_limit_g / 1000
+
+    def stored_water_l(self) -> float:
+        return self.stored_water_ml / 1000
+
+    def water_requirement_l(self) -> float:
+        return self.water_requirement_ml / 1000
 
     @classmethod
     def calculate_stats(
@@ -51,13 +67,30 @@ class KitStats:
         else:
             weight_bar_colour = "red"
 
+        daily_calories = (
+            kit.config.num_adults * ADULT_CALORIES_PER_DAY
+            + kit.config.num_children * CHILD_CALORIES_PER_DAY
+            + kit.config.num_young_children * YOUNG_CHILD_CALORIES_PER_DAY
+            + kit.config.num_infants * INFANT_CALORIES_PER_DAY
+        )
+
+        daily_water_ml = (
+            kit.config.num_adults * ADULT_WATER_ML_PER_DAY
+            + kit.config.num_children * CHILD_WATER_ML_PER_DAY
+            + kit.config.num_young_children * YOUNG_CHILD_WATER_ML_PER_DAY
+            + kit.config.num_infants * INFANT_WATER_ML_PER_DAY
+        )
+
+        calorie_requirement = daily_calories * kit.config.duration_days
+        water_requirement_ml = daily_water_ml * kit.config.duration_days
+
         return cls(
             total_weight_g=total_weight_g,
             total_calories=total_calories,
             stored_water_ml=stored_water_ml,
             purifiable_water_ml=purifiable_water_ml,
-            calorie_requirement=0,
-            water_requirement_ml=0,
+            calorie_requirement=calorie_requirement,
+            water_requirement_ml=water_requirement_ml,
             weight_limit_g=kit.config.weight_limit_g,
             readiness_score=0,
             weight_percentage=weight_percentage,

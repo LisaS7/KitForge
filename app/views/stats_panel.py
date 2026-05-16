@@ -47,7 +47,7 @@ def build_stats_controls(stats: KitStats) -> list[ft.Control]:
         spacing=2,
         controls=[
             ft.Text("Calories"),
-            ft.Text(f"{stats.total_calories} kcal"),
+            ft.Text(f"{stats.total_calories} / {stats.calorie_requirement} kcal"),
         ],
     )
 
@@ -55,7 +55,9 @@ def build_stats_controls(stats: KitStats) -> list[ft.Control]:
         spacing=2,
         controls=[
             ft.Text("Water"),
-            ft.Text(f"{stats.stored_water_ml} ml"),
+            ft.Text(
+                f"{stats.stored_water_l():.1f} / {stats.water_requirement_l():.1f} L"
+            ),
         ],
     )
 
