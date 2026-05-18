@@ -1,5 +1,10 @@
-from app.catalogue import check_unique_ids, validate_catalogue
-from app.models import CatalogueItem, Category
+from app.catalogue import (
+    check_category_requirements,
+    check_item_requirements,
+    check_unique_ids,
+    validate_catalogue,
+)
+from app.models import CatalogueItem, Category, Requirement, RequirementType
 
 
 def make_item(id: str, **overrides) -> CatalogueItem:
@@ -57,3 +62,57 @@ def test_validate_catalogue_real_catalogue():
     from app.catalogue import load_catalogue
     items = load_catalogue()
     assert validate_catalogue(items) == []
+
+
+# --- check_item_requirements ---
+
+def make_item_req(target_id: str) -> Requirement:
+    return Requirement(type=RequirementType.ITEM, target_id=target_id)
+
+
+def make_category_req(category: Category) -> Requirement:
+    return Requirement(type=RequirementType.CATEGORY, target_category=category)
+
+
+def test_item_requirements_no_errors():
+    a = make_item("a")
+    b = make_item("b", requires=[make_item_req("a")])
+    assert check_item_requirements([a, b]) == []
+
+
+def test_item_requirements_unknown_target():
+    a = make_item("a", requires=[make_item_req("missing")])
+    errors = check_item_requirements([a])
+    assert len(errors) == 1
+    assert "missing" in errors[0]
+
+
+def test_item_requirements_self_reference():
+    a = make_item("a", requires=[make_item_req("a")])
+    errors = check_item_requirements([a])
+    assert any("itself" in e for e in errors)
+
+
+def test_item_requirements_ignores_non_item_types():
+    a = make_item("a", requires=[make_category_req(Category.WATER)])
+    assert check_item_requirements([a]) == []
+
+
+def test_item_requirements_empty():
+    assert check_item_requirements([]) == []
+
+
+# --- check_category_requirements ---
+
+def test_category_requirements_no_errors():
+    a = make_item("a", requires=[make_category_req(Category.WATER)])
+    assert check_category_requirements([a]) == []
+
+
+def test_category_requirements_ignores_non_category_types():
+    a = make_item("a", requires=[make_item_req("b")])
+    assert check_category_requirements([a]) == []
+
+
+def test_category_requirements_empty():
+    assert check_category_requirements([]) == []
