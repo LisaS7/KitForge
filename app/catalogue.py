@@ -59,8 +59,26 @@ def check_item_requirements(data: list[CatalogueItem]) -> list[str]:
     return errors
 
 
+def check_category_requirements(data: list[CatalogueItem]) -> list[str]:
+    errors = []
+    valid_categories = {category.value for category in Category}
+
+    for item in data:
+        for requirement in item.requires:
+            if requirement.type != "category":
+                continue
+
+            if requirement.target_category not in valid_categories:
+                errors.append(
+                    f"{item.id} requires unknown category: {requirement.target_category}"
+                )
+
+    return errors
+
+
 def validate_catalogue(data: list[CatalogueItem]) -> list[str]:
     errors = []
     errors.extend(check_unique_ids(data))
     errors.extend(check_item_requirements(data))
+    errors.extend(check_category_requirements(data))
     return errors
