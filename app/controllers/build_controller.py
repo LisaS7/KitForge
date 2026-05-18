@@ -1,3 +1,5 @@
+import threading
+
 import flet as ft
 
 from app.config import KITS_DIR
@@ -29,6 +31,8 @@ class BuildController:
         self.bag_area: ft.Control | None = None
         self.stats_panel: ft.Control | None = None
 
+        self._save_timer: threading.Timer | None = None
+
     def get_catalogue_item(self, item_id: str) -> CatalogueItem:
         return self.catalogue_lookup[item_id]
 
@@ -59,22 +63,22 @@ class BuildController:
 
     def add_item(self, item: CatalogueItem) -> None:
         self.kit.add_item(item.id)
-        self.save()
+        self.schedule_save()
         self.refresh_all()
 
     def remove_item(self, item_id: str) -> None:
         self.kit.remove_item(item_id)
-        self.save()
+        self.schedule_save()
         self.refresh_all()
 
     def increment_item(self, item_id: str) -> None:
         self.kit.increment_item(item_id)
-        self.save()
+        self.schedule_save()
         self.refresh_all()
 
     def decrement_item(self, item_id: str) -> None:
         self.kit.decrement_item(item_id)
-        self.save()
+        self.schedule_save()
         self.refresh_all()
 
     def refresh_catalogue(self) -> None:
@@ -105,5 +109,16 @@ class BuildController:
         self.refresh_stats()
         self.page.update()
 
-    def save(self) -> None:
+    def save_now(self) -> None:
+        if self._save_timer:
+            self._save_timer.cancel()
+            self._save_timer = None
+
         save_kit(self.kit, KITS_DIR)
+
+    def schedule_save(self) -> None:
+        if self._save_timer:
+            self._save_timer.cancel()
+        self._save_timer = threading.Timer(0.5, self.save_now)
+        self._save_timer.daemon = True
+        self._save_timer.start()
