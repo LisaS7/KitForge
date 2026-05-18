@@ -77,9 +77,96 @@ def test_weight_limit_from_config():
     assert stats.weight_limit_g == 5000
 
 
+def test_weight_bar_colour_green():
+    # 0 g / 10000 g = 0% < 75%
+    kit = Kit.create("test", make_config(weight_limit_g=10000))
+    stats = KitStats.calculate_stats(kit, {})
+    assert stats.weight_bar_colour == "green"
+
+
+def test_weight_bar_colour_amber():
+    # 8000 g / 10000 g = 80%, between 75% and 100%
+    kit = Kit.create("test", make_config(weight_limit_g=10000))
+    item = make_item("a", weight_g=8000)
+    kit.add_item("a")
+    stats = KitStats.calculate_stats(kit, {"a": item})
+    assert stats.weight_bar_colour == "amber"
+
+
+def test_weight_bar_colour_red():
+    # 11000 g / 10000 g = 110%, over limit
+    kit = Kit.create("test", make_config(weight_limit_g=10000))
+    item = make_item("a", weight_g=11000)
+    kit.add_item("a")
+    stats = KitStats.calculate_stats(kit, {"a": item})
+    assert stats.weight_bar_colour == "red"
+
+
 def test_defaults_for_unset_fields():
     kit = Kit.create("test", make_config())
     stats = KitStats.calculate_stats(kit, {})
-    assert stats.calorie_requirement == 0
-    assert stats.water_requirement_ml == 0
+    # 1 adult × 2000 kcal × 3 days = 6000; 1 adult × 3000 ml × 3 days = 9000
+    assert stats.calorie_requirement == 6000
+    assert stats.water_requirement_ml == 9000
     assert stats.readiness_score == 0
+
+
+# --- Unit conversion methods ---
+
+def test_total_weight_kg():
+    kit = Kit.create("test", make_config())
+    item = make_item("a", weight_g=1500)
+    kit.add_item("a")
+    stats = KitStats.calculate_stats(kit, {"a": item})
+    assert stats.total_weight_kg() == 1.5
+
+
+def test_weight_limit_kg():
+    kit = Kit.create("test", make_config(weight_limit_g=5000))
+    stats = KitStats.calculate_stats(kit, {})
+    assert stats.weight_limit_kg() == 5.0
+
+
+def test_stored_water_l():
+    kit = Kit.create("test", make_config())
+    item = make_item("a", water_ml=2500)
+    kit.add_item("a")
+    stats = KitStats.calculate_stats(kit, {"a": item})
+    assert stats.stored_water_l() == 2.5
+
+
+def test_water_requirement_l():
+    # 1 adult × 3000 ml × 1 day = 3000 ml = 3.0 L
+    kit = Kit.create("test", make_config(duration_days=1))
+    stats = KitStats.calculate_stats(kit, {})
+    assert stats.water_requirement_l() == 3.0
+
+
+# --- Multi-person calorie/water requirements ---
+
+def test_calorie_requirement_multi_person():
+    cfg = make_config(
+        num_adults=1,
+        num_children=1,
+        num_young_children=1,
+        num_infants=1,
+        duration_days=1,
+    )
+    kit = Kit.create("test", cfg)
+    stats = KitStats.calculate_stats(kit, {})
+    # 2000 + 1500 + 1200 + 700 = 5400 per day × 1 day
+    assert stats.calorie_requirement == 5400
+
+
+def test_water_requirement_multi_person():
+    cfg = make_config(
+        num_adults=1,
+        num_children=1,
+        num_young_children=1,
+        num_infants=1,
+        duration_days=1,
+    )
+    kit = Kit.create("test", cfg)
+    stats = KitStats.calculate_stats(kit, {})
+    # 3000 + 2000 + 1500 + 1000 = 7500 ml per day × 1 day
+    assert stats.water_requirement_ml == 7500
