@@ -36,7 +36,7 @@ def build_stats_controls(stats: KitStats) -> list[ft.Control]:
                 f"{stats.total_weight_kg():.1f} kg / {stats.weight_limit_kg():.1f} kg"
             ),
             ft.ProgressBar(
-                value=stats.weight_percentage,
+                value=stats.weight_percentage,  # type: ignore
                 color=stats.weight_bar_colour,
                 width=120,
             ),
