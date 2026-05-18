@@ -39,7 +39,28 @@ def check_unique_ids(data: list[CatalogueItem]) -> list[str]:
     return errors
 
 
+def check_item_requirements(data: list[CatalogueItem]) -> list[str]:
+    errors = []
+    item_ids = {item.id for item in data}
+
+    for item in data:
+        for requirement in item.requires:
+            if requirement.type != "item":
+                continue
+
+            if requirement.target_id not in item_ids:
+                errors.append(
+                    f"{item.id} requires unknown item: {requirement.target_id}"
+                )
+
+            if requirement.target_id == item.id:
+                errors.append(f"{item.id} requires itself")
+
+    return errors
+
+
 def validate_catalogue(data: list[CatalogueItem]) -> list[str]:
     errors = []
     errors.extend(check_unique_ids(data))
+    errors.extend(check_item_requirements(data))
     return errors
