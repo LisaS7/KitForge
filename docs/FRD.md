@@ -158,5 +158,4 @@
   - Every `requires` entry of type `item` references an existing item ID
   - Every `requires` entry of type `category` references a recognised category
   - No item requires itself
-  - No circular dependencies between items (detected via depth-first traversal: track current path, fail if item encountered twice in same path)
-- If validation fails, the app displays an error identifying the issue (e.g., "Circular dependency: A → B → C → A") and does not start
+- If validation fails, the app displays an error identifying the issue and does not start

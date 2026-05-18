@@ -53,7 +53,6 @@ erDiagram
 
     Category {
         string name
-        Priority priority
     }
 
     Kit ||--|| KitConfig : "has"

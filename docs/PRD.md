@@ -37,7 +37,7 @@ The MVP covers one kit type: the **bug-out bag (BOB)**. All features below are i
 
 ### 4.2 Kit Configuration
 
-- Set a weight limit (kg)
+- Set a weight limit (grams)
 - Set number of people by age group: adults (13+), children (6-12), young children (2-5), infants (0-1)
 - Set duration the kit must cover (days)
 - Configuration accessible on kit creation and via a button on the build screen
@@ -121,7 +121,7 @@ The following are explicitly deferred to future versions:
 | Offline | Fully offline; no network calls |
 | Storage | Local filesystem; one JSON file per kit in `./data/kits/` relative to app working directory; directory created automatically on startup if missing |
 | Auto-save | Kit changes debounced and saved ~500ms after last change; immediate save on app close or kit switch |
-| Startup validation | Catalogue integrity checked on launch (unique IDs, valid references, no circular dependencies via depth-first traversal) |
+| Startup validation | Catalogue integrity checked on launch (unique IDs, valid item and category references, no self-dependencies) |
 | Resilience | If a kit references a catalogue item that no longer exists, skip it with a warning rather than crash |
 
 ---
