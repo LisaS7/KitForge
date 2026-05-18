@@ -3,8 +3,9 @@ import logging
 import flet as ft
 
 from app.catalogue import group_by_category, load_catalogue
-from app.config import LOG_FILE
+from app.config import KITS_DIR, LOG_FILE
 from app.models import Kit, KitConfig
+from app.storage import load_all_kits
 from app.views.build import build_screen
 from app.views.page import configure_page
 
@@ -38,7 +39,13 @@ def main(page: ft.Page) -> None:
         num_infants=0,
         duration_days=10,
     )
-    kit = Kit.create("Test Kit", kit_config)
+
+    kits = load_all_kits(KITS_DIR)
+    if not kits:
+        kits = [Kit.create("My Kit", kit_config)]
+
+    # TODO: this is a placeholder until we have the kit selection screen built
+    kit = kits[0]
 
     build_view = build_screen(page, categories, catalogue_lookup, kit)
 
