@@ -2,7 +2,7 @@ import logging
 
 import flet as ft
 
-from app.catalogue import group_by_category, load_catalogue
+from app.catalogue import group_by_category, load_catalogue, validate_catalogue
 from app.config import KITS_DIR, LOG_FILE
 from app.models import Kit, KitConfig
 from app.storage import load_all_kits
@@ -28,6 +28,13 @@ def main(page: ft.Page) -> None:
     configure_page(page)
 
     data = load_catalogue()
+    catalogue_errors = validate_catalogue(data)
+
+    if catalogue_errors:
+        for error in catalogue_errors:
+            logging.error(error)
+        return
+
     categories = group_by_category(data)
     catalogue_lookup = {item.id: item for item in data}
 
