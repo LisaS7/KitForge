@@ -1,10 +1,11 @@
 from app.catalogue import (
     check_category_requirements,
     check_item_requirements,
+    check_resource_requirements,
     check_unique_ids,
     validate_catalogue,
 )
-from app.models import CatalogueItem, Category, Requirement, RequirementType
+from app.models import CatalogueItem, Category, Requirement, RequirementType, ResourceType
 
 
 def make_item(id: str, **overrides) -> CatalogueItem:
@@ -102,6 +103,14 @@ def test_item_requirements_empty():
     assert check_item_requirements([]) == []
 
 
+def test_item_requirements_none_target_id():
+    req = Requirement(type=RequirementType.ITEM, target_id=None)
+    a = make_item("a", requires=[req])
+    errors = check_item_requirements([a])
+    assert len(errors) == 1
+    assert "no target" in errors[0].lower()
+
+
 # --- check_category_requirements ---
 
 def test_category_requirements_no_errors():
@@ -116,3 +125,64 @@ def test_category_requirements_ignores_non_category_types():
 
 def test_category_requirements_empty():
     assert check_category_requirements([]) == []
+
+
+def test_category_requirements_none_target_category():
+    req = Requirement(type=RequirementType.CATEGORY, target_category=None)
+    a = make_item("a", requires=[req])
+    errors = check_category_requirements([a])
+    assert len(errors) == 1
+    assert "no target" in errors[0].lower()
+
+
+# --- check_resource_requirements ---
+
+def make_resource_req(resource: ResourceType, amount: int | None = None) -> Requirement:
+    return Requirement(type=RequirementType.RESOURCE, resource=resource, amount=amount)
+
+
+def test_resource_requirements_water_source_no_errors():
+    a = make_item("a", requires=[make_resource_req(ResourceType.WATER_SOURCE)])
+    assert check_resource_requirements([a]) == []
+
+
+def test_resource_requirements_water_ml_valid():
+    a = make_item("a", requires=[make_resource_req(ResourceType.WATER_ML, amount=500)])
+    assert check_resource_requirements([a]) == []
+
+
+def test_resource_requirements_water_ml_no_amount():
+    a = make_item("a", requires=[make_resource_req(ResourceType.WATER_ML, amount=None)])
+    errors = check_resource_requirements([a])
+    assert len(errors) == 1
+    assert "amount" in errors[0].lower()
+
+
+def test_resource_requirements_water_ml_zero_amount():
+    a = make_item("a", requires=[make_resource_req(ResourceType.WATER_ML, amount=0)])
+    errors = check_resource_requirements([a])
+    assert len(errors) == 1
+    assert "not positive" in errors[0].lower()
+
+
+def test_resource_requirements_water_ml_negative_amount():
+    a = make_item("a", requires=[make_resource_req(ResourceType.WATER_ML, amount=-100)])
+    errors = check_resource_requirements([a])
+    assert len(errors) == 1
+
+
+def test_resource_requirements_none_resource():
+    req = Requirement(type=RequirementType.RESOURCE, resource=None)
+    a = make_item("a", requires=[req])
+    errors = check_resource_requirements([a])
+    assert len(errors) == 1
+    assert "no resource" in errors[0].lower()
+
+
+def test_resource_requirements_ignores_non_resource_types():
+    a = make_item("a", requires=[make_item_req("b")])
+    assert check_resource_requirements([a]) == []
+
+
+def test_resource_requirements_empty():
+    assert check_resource_requirements([]) == []

@@ -3,7 +3,7 @@ import logging
 from collections import defaultdict
 
 from .config import CATALOGUE_PATH
-from .models import CatalogueItem, Category
+from .models import CatalogueItem, Category, RequirementType, ResourceType
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +45,11 @@ def check_item_requirements(data: list[CatalogueItem]) -> list[str]:
 
     for item in data:
         for requirement in item.requires:
-            if requirement.type != "item":
+            if requirement.type != RequirementType.ITEM:
+                continue
+
+            if requirement.target_id is None:
+                errors.append(f"{item.id} has item requirement with no target ID")
                 continue
 
             if requirement.target_id not in item_ids:
@@ -61,17 +65,39 @@ def check_item_requirements(data: list[CatalogueItem]) -> list[str]:
 
 def check_category_requirements(data: list[CatalogueItem]) -> list[str]:
     errors = []
-    valid_categories = {category.value for category in Category}
 
     for item in data:
         for requirement in item.requires:
-            if requirement.type != "category":
+            if requirement.type != RequirementType.CATEGORY:
                 continue
 
-            if requirement.target_category not in valid_categories:
+            if requirement.target_category is None:
                 errors.append(
-                    f"{item.id} requires unknown category: {requirement.target_category}"
+                    f"{item.id} has category requirement with no target category"
                 )
+
+    return errors
+
+
+def check_resource_requirements(data: list[CatalogueItem]) -> list[str]:
+    errors = []
+
+    for item in data:
+        for requirement in item.requires:
+            if requirement.type != RequirementType.RESOURCE:
+                continue
+
+            if requirement.resource is None:
+                errors.append(f"{item.id} has resource requirement with no resource")
+                continue
+
+            if requirement.resource == ResourceType.WATER_ML:
+                if requirement.amount is None:
+                    errors.append(f"{item.id} requires water_ml but has no amount")
+                elif requirement.amount <= 0:
+                    errors.append(
+                        f"{item.id} requires water_ml but amount is not positive: {requirement.amount}"
+                    )
 
     return errors
 
@@ -81,4 +107,5 @@ def validate_catalogue(data: list[CatalogueItem]) -> list[str]:
     errors.extend(check_unique_ids(data))
     errors.extend(check_item_requirements(data))
     errors.extend(check_category_requirements(data))
+    errors.extend(check_resource_requirements(data))
     return errors
