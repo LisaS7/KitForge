@@ -1,7 +1,9 @@
 import flet as ft
 
+from app.config import KITS_DIR
 from app.models import CatalogueItem, Category, Kit
 from app.stats import KitStats
+from app.storage import save_kit
 from app.views.catalogue_panel import build_category_grid, build_item_list
 from app.views.kit_panel import build_kit_controls
 from app.views.stats_panel import build_stats_controls
@@ -57,18 +59,22 @@ class BuildController:
 
     def add_item(self, item: CatalogueItem) -> None:
         self.kit.add_item(item.id)
+        self.save()
         self.refresh_all()
 
     def remove_item(self, item_id: str) -> None:
         self.kit.remove_item(item_id)
+        self.save()
         self.refresh_all()
 
     def increment_item(self, item_id: str) -> None:
         self.kit.increment_item(item_id)
+        self.save()
         self.refresh_all()
 
     def decrement_item(self, item_id: str) -> None:
         self.kit.decrement_item(item_id)
+        self.save()
         self.refresh_all()
 
     def refresh_catalogue(self) -> None:
@@ -98,3 +104,6 @@ class BuildController:
         self.refresh_kit()
         self.refresh_stats()
         self.page.update()
+
+    def save(self) -> None:
+        save_kit(self.kit, KITS_DIR)

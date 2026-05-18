@@ -54,7 +54,7 @@
 ## Phase 5: Persistence
 **Goal: Data survives reboot**
 
-- [ ] Save kit to `data/kits/<id>.json` (FR-19)
+- [x] Save kit to `data/kits/<id>.json` (FR-19)
 - [ ] Auto-save with debounce (~500ms); immediate save on close/switch/report (FR-19)
 - [ ] Load all kits from `data/kits/*.json` on launch (FR-20)
 - [ ] Catalogue integrity check on startup (FR-21)
