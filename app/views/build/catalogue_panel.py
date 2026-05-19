@@ -2,10 +2,10 @@ from typing import TYPE_CHECKING
 
 import flet as ft
 
-from app.views.icons import CATEGORY_ICONS
+from app.views.common import styles
+from app.views.common.icons import CATEGORY_ICONS
 
-from ..models import CatalogueItem, Category
-from . import styles
+from ...models import CatalogueItem, Category
 
 if TYPE_CHECKING:
     from app.controllers.build_controller import BuildController

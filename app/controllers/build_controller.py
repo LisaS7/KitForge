@@ -6,9 +6,9 @@ from app.config import KITS_DIR
 from app.models import CatalogueItem, Category, Kit
 from app.stats import KitStats
 from app.storage import save_kit
-from app.views.catalogue_panel import build_category_grid, build_item_list
-from app.views.kit_panel import build_kit_controls
-from app.views.stats_panel import build_stats_controls
+from app.views.build.catalogue_panel import build_category_grid, build_item_list
+from app.views.build.kit_panel import build_kit_controls
+from app.views.build.stats_panel import build_stats_controls
 
 
 class BuildController:

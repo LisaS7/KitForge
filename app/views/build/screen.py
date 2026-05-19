@@ -1,12 +1,11 @@
 import flet as ft
 
 from app.controllers.build_controller import BuildController
-from app.views.bag_panel import build_middle_panel
-from app.views.catalogue_panel import build_catalogue_panel
-from app.views.kit_panel import build_kit_panel
-from app.views.stats_panel import build_stats_panel
-
-from . import styles
+from app.views.build.bag_panel import build_middle_panel
+from app.views.build.catalogue_panel import build_catalogue_panel
+from app.views.build.kit_panel import build_kit_panel
+from app.views.build.stats_panel import build_stats_panel
+from app.views.common import styles
 
 
 def build_header() -> ft.Container:
@@ -17,7 +16,7 @@ def build_header() -> ft.Container:
         content=ft.Row(
             controls=[
                 ft.Text(
-                    "New Kit",
+                    "New Kit",  # type: ignore
                     size=styles.TITLE_SIZE,
                     weight=ft.FontWeight.BOLD,
                 ),

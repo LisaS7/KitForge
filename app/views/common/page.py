@@ -1,6 +1,6 @@
 import flet as ft
 
-from app.views import styles
+from app.views.common import styles
 
 
 def configure_page(page: ft.Page) -> None:

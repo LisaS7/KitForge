@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 import flet as ft
 
 from app.stats import KitStats
-from app.views import styles
+from app.views.common import styles
 
 if TYPE_CHECKING:
     from app.controllers.build_controller import BuildController

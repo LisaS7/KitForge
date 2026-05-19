@@ -7,8 +7,8 @@ from app.config import KITS_DIR, LOG_FILE
 from app.controllers.app_controller import AppController
 from app.models import Kit, KitConfig
 from app.storage import load_all_kits
+from app.views.common.page import configure_page
 from app.views.error_screen import error_screen
-from app.views.page import configure_page
 
 logging.basicConfig(
     level=logging.DEBUG,

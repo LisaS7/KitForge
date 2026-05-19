@@ -1,6 +1,6 @@
 import flet as ft
 
-from app.views import styles
+from app.views.common import styles
 
 
 def error_screen(errors: list[str]) -> ft.Control:
