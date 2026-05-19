@@ -65,7 +65,7 @@
 ## Phase 6: Kit List Screen
 **Goal: Multiple kits usable**
 
-- [ ] Screen routing / `AppController` (Kit List ↔ Build Screen ↔ Report)
+- [x] Screen routing / `AppController` (Kit List ↔ Build Screen ↔ Report)
 - [ ] Kit list UI — 3-column card grid with name, readiness score, weight, last modified (FR-01b)
 - [ ] Empty state (FR-01b)
 - [ ] "+ New Kit" → Kit Configuration modal → build screen (FR-01)

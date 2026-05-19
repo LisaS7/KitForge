@@ -66,7 +66,8 @@ def main(page: ft.Page) -> None:
 
     controller = AppController(page, kits, categories, catalogue_lookup)
 
-    controller.show_build_screen(kit)
+    # controller.show_build_screen(kit)
+    controller.show_kit_list()
 
 
 if __name__ == "__main__":

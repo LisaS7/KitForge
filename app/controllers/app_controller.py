@@ -1,10 +1,9 @@
 import flet as ft
 
-from app.config import KITS_DIR
 from app.controllers.build_controller import BuildController
 from app.models import CatalogueItem, Category, Kit
-from app.storage import load_all_kits
 from app.views.build.screen import build_screen
+from app.views.kit_list.screen import build_kit_list_screen
 
 
 class AppController:
@@ -23,7 +22,10 @@ class AppController:
         self.catalogue_lookup = catalogue_lookup
 
     def show_kit_list(self):
-        self.kits = load_all_kits(KITS_DIR)
+        view = build_kit_list_screen(self)
+        self.page.controls.clear()
+        self.page.add(view)
+        self.page.update()
 
     def show_build_screen(self, kit: Kit):
         self.current_kit = kit
