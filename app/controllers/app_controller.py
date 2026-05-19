@@ -42,3 +42,12 @@ class AppController:
 
     def show_report(self, kit: Kit):
         pass
+
+    def new_kit(self):
+        pass  # TODO: open new-kit dialog
+
+    def copy_kit(self, kit: Kit):
+        pass  # TODO: duplicate kit
+
+    def delete_kit(self, kit: Kit):
+        pass  # TODO: confirm and delete kit
