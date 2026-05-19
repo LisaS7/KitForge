@@ -70,7 +70,7 @@
 - [x] Empty state (FR-01b)
 - [ ] "+ New Kit" → Kit Configuration modal → build screen (FR-01)
 - [ ] Kit Configuration modal — weight limit, people, duration; validation (FR-05)
-- [ ] Inline rename on build screen header (FR-02)
+- [x] Inline rename on build screen header (FR-02)
 - [ ] Copy kit from card (FR-03)
 - [ ] Delete kit from card (FR-04)
 
@@ -102,7 +102,7 @@
 ## Phase 9: UX Polish
 **Goal: Smooth, complete experience**
 
-- [ ] Item tooltips: weight, calories, water, notes (FR-07)
+- [x] Item tooltips: weight, calories, water, notes (FR-07)
 - [ ] Drag & drop: catalogue → bag area (FR-08b)
 - [ ] Debounced auto-save
 - [ ] Rename/copy/delete polish
