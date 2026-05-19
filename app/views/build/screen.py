@@ -16,7 +16,7 @@ def build_header() -> ft.Container:
         content=ft.Row(
             controls=[
                 ft.Text(
-                    "New Kit",  # type: ignore
+                    value="New Kit",
                     size=styles.TITLE_SIZE,
                     weight=ft.FontWeight.BOLD,
                 ),

@@ -29,7 +29,8 @@ class BuildController:
         self.catalogue_column: ft.Column | None = None
         self.kit_column: ft.Column | None = None
         self.bag_area: ft.Control | None = None
-        self.stats_panel: ft.Control | None = None
+        self.stats_panel: ft.Container | None = None
+        self.stats_row: ft.Row | None = None
 
         self._save_timer: threading.Timer | None = None
 
@@ -98,10 +99,10 @@ class BuildController:
         self.kit_column.controls = build_kit_controls(self)
 
     def refresh_stats(self) -> None:
-        if self.stats_panel is None:
+        if self.stats_row is None:
             return
         stats = KitStats.calculate_stats(self.kit, self.catalogue_lookup)
-        self.stats_panel.content.controls = build_stats_controls(stats)  # type: ignore
+        self.stats_row.controls = build_stats_controls(stats)
 
     def refresh_all(self) -> None:
         self.refresh_catalogue()

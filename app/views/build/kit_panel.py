@@ -90,7 +90,7 @@ def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
     for category, items in grouped_items.items():
         is_collapsed = category in controller.collapsed_categories
 
-        section_controls = [
+        section_controls: list[ft.Control] = [
             ft.Container(
                 content=ft.Row(
                     controls=[
@@ -114,11 +114,11 @@ def build_kit_controls(controller: "BuildController") -> list[ft.Control]:
 
         if not is_collapsed:
             for item in items:
-                section_controls.append(build_packed_item_row(controller, item))  # type: ignore
+                section_controls.append(build_packed_item_row(controller, item))
         controls.append(
             ft.Container(
                 content=ft.Column(
-                    controls=section_controls,  # type: ignore
+                    controls=section_controls,
                     spacing=0,
                 ),
                 border=ft.border.only(

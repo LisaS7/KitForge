@@ -1,0 +1,20 @@
+{
+  "id": "63291987-e295-4f5a-a961-a49d46bf1f42",
+  "name": "My Kit",
+  "created_at": "2026-05-19T11:44:01.876995Z",
+  "modified_at": "2026-05-19T11:44:10.781166Z",
+  "config": {
+    "weight_limit_g": 25000,
+    "num_adults": 2,
+    "num_children": 0,
+    "num_young_children": 0,
+    "num_infants": 0,
+    "duration_days": 10
+  },
+  "items": [
+    {
+      "item_id": "emergency_ration_bar",
+      "qty": 3
+    }
+  ]
+}

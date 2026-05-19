@@ -102,15 +102,16 @@ def item_tile(item: CatalogueItem, on_click) -> ft.Container:
 
 
 def build_category_grid(controller: "BuildController") -> ft.GridView:
+    tiles: list[ft.Control] = [
+        category_tile(
+            category,
+            on_click=handle_select_category(controller, category),
+            is_covered=controller.is_category_covered(category),
+        )
+        for category in controller.categories
+    ]
     return ft.GridView(
-        controls=[
-            category_tile(
-                category,
-                on_click=handle_select_category(controller, category),
-                is_covered=controller.is_category_covered(category),
-            )
-            for category in controller.categories
-        ],  # type: ignore
+        controls=tiles,
         runs_count=2,
         max_extent=100,
         child_aspect_ratio=1,

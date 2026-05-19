@@ -19,7 +19,7 @@ def build_middle_panel(controller: "BuildController") -> ft.Container:
                     src="backpack.png",
                     width=200,
                     height=200,
-                    fit="contain",  # type: ignore
+                    fit=ft.BoxFit.CONTAIN,
                 ),
                 ft.Text("Drag items here", color=styles.MUTED_TEXT),
             ],

@@ -86,7 +86,6 @@ def _kit_card(kit, stats: KitStats, controller: "AppController") -> ft.Container
 
     def action_btn(label: str, on_click, danger: bool = False) -> ft.TextButton:
         color = styles.TEXT
-        hover_color = styles.DANGER if danger else None
         return ft.TextButton(
             content=ft.Text(label, size=styles.BODY_SIZE, color=color),
             on_click=on_click,
@@ -96,7 +95,7 @@ def _kit_card(kit, stats: KitStats, controller: "AppController") -> ft.Container
                 overlay_color={
                     ft.ControlState.HOVERED: "#f5e0e0" if danger else styles.SURFACE,
                 },
-                color={ft.ControlState.HOVERED: hover_color} if danger else None,
+                color={ft.ControlState.HOVERED: styles.DANGER} if danger else None,
             ),
             expand=True,
         )
@@ -157,7 +156,7 @@ def _empty_state() -> ft.Container:
             spacing=styles.ITEM_SPACING,
         ),
         padding=ft.padding.symmetric(vertical=80),
-        alignment=ft.alignment.center,  # type: ignore
+        alignment=ft.Alignment.CENTER,
     )
 
 
@@ -221,8 +220,10 @@ def build_kit_list_screen(controller: "AppController") -> ft.Control:
                 chunk.append(ft.Container(expand=True))
             rows.append(
                 ft.Row(
-                    controls=chunk, spacing=styles.SECTION_SPACING, expand=True
-                )  # pyright: ignore[reportArgumentType]
+                    controls=chunk,  # pyright: ignore[reportArgumentType]
+                    spacing=styles.SECTION_SPACING,
+                    expand=True,
+                )
             )
 
         grid = ft.Column(controls=rows, spacing=styles.SECTION_SPACING)

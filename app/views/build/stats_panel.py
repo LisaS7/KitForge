@@ -10,20 +10,22 @@ if TYPE_CHECKING:
 
 
 def build_stats_panel(controller: "BuildController") -> ft.Container:
+    stats_row = ft.Row(
+        controls=[],
+        alignment=ft.MainAxisAlignment.START,
+        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        spacing=styles.SECTION_SPACING,
+    )
     stats_panel = ft.Container(
         expand=False,
         bgcolor=styles.SURFACE,
         border=ft.border.only(top=ft.BorderSide(styles.BORDER_WIDTH, styles.BORDER)),
         padding=styles.PANEL_PADDING,
-        content=ft.Row(
-            controls=[],
-            alignment=ft.MainAxisAlignment.START,
-            vertical_alignment=ft.CrossAxisAlignment.CENTER,
-            spacing=styles.SECTION_SPACING,
-        ),
+        content=stats_row,
     )
 
     controller.stats_panel = stats_panel
+    controller.stats_row = stats_row
     return stats_panel
 
 
@@ -36,7 +38,7 @@ def build_stats_controls(stats: KitStats) -> list[ft.Control]:
                 f"{stats.total_weight_kg():.1f} kg / {stats.weight_limit_kg():.1f} kg"
             ),
             ft.ProgressBar(
-                value=stats.weight_percentage,  # type: ignore
+                value=stats.weight_percentage,  # type: ignore[arg-type]  # Pylance: Number alias not resolved
                 color=stats.weight_bar_colour,
                 width=120,
             ),
