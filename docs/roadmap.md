@@ -57,7 +57,8 @@
 - [x] Save kit to `data/kits/<id>.json` (FR-19)
 - [x] Auto-save with debounce (~500ms); immediate save on close/switch/report (FR-19)
 - [x] Load all kits from `data/kits/*.json` on launch (FR-20)
-- [ ] Catalogue integrity check on startup (FR-21)
+- [x] Catalogue integrity check on startup (FR-21)
+- [x] Display errors on startup for failed validation
 
 ---
 

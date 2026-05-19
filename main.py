@@ -7,6 +7,7 @@ from app.config import KITS_DIR, LOG_FILE
 from app.models import Kit, KitConfig
 from app.storage import load_all_kits
 from app.views.build import build_screen
+from app.views.error_screen import error_screen
 from app.views.page import configure_page
 
 logging.basicConfig(
@@ -27,12 +28,21 @@ logging.getLogger("asyncio").setLevel(logging.WARNING)
 def main(page: ft.Page) -> None:
     configure_page(page)
 
-    data = load_catalogue()
+    try:
+        data = load_catalogue()
+    except Exception as e:
+        logging.exception("Failed to load catalogue")
+        page.add(error_screen([str(e)]))
+        return
+
     catalogue_errors = validate_catalogue(data)
 
     if catalogue_errors:
         for error in catalogue_errors:
             logging.error(error)
+        page.vertical_alignment = ft.MainAxisAlignment.CENTER
+        page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+        page.add(error_screen(catalogue_errors))
         return
 
     categories = group_by_category(data)
