@@ -61,9 +61,6 @@ def main(page: ft.Page) -> None:
     if not kits:
         kits = [Kit.create("My Kit", kit_config)]
 
-    # TODO: this is a placeholder until we have the kit selection screen built
-    kit = kits[0]
-
     controller = AppController(page, kits, categories, catalogue_lookup)
 
     # controller.show_build_screen(kit)
