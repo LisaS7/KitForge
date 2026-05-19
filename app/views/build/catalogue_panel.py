@@ -70,7 +70,7 @@ def category_tile(category: Category, on_click, is_covered: bool) -> ft.Containe
     )
 
 
-def item_tile(item: CatalogueItem, on_click) -> ft.Tooltip:
+def item_tile(item: CatalogueItem, on_click) -> ft.Container:
     tooltip_parts = [f"{item.weight_g}g"]
     if item.calories:
         tooltip_parts.append(f"{item.calories} kcal")
@@ -79,7 +79,7 @@ def item_tile(item: CatalogueItem, on_click) -> ft.Tooltip:
     if item.notes:
         tooltip_parts.append(item.notes)
 
-    tile = ft.Container(
+    return ft.Container(
         content=ft.Column(
             controls=[
                 ft.Text(item.name, size=styles.LABEL_SIZE, text_align=ft.TextAlign.CENTER),
@@ -96,9 +96,8 @@ def item_tile(item: CatalogueItem, on_click) -> ft.Tooltip:
         padding=styles.TILE_PADDING,
         border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
         bgcolor=styles.BACKGROUND,
+        tooltip=" · ".join(tooltip_parts),
     )
-
-    return ft.Tooltip(message=" · ".join(tooltip_parts), content=tile)
 
 
 def build_category_grid(controller: "BuildController") -> ft.GridView:
