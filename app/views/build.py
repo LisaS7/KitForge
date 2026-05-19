@@ -6,7 +6,6 @@ from app.views.catalogue_panel import build_catalogue_panel
 from app.views.kit_panel import build_kit_panel
 from app.views.stats_panel import build_stats_panel
 
-from ..models import CatalogueItem, Category, Kit
 from . import styles
 
 
@@ -31,14 +30,7 @@ def build_header() -> ft.Container:
     )
 
 
-def build_screen(
-    page: ft.Page,
-    categories: dict[Category, list[CatalogueItem]],
-    catalogue_lookup: dict[str, CatalogueItem],
-    kit: Kit,
-) -> ft.Control:
-    controller = BuildController(page, kit, categories, catalogue_lookup)
-
+def build_screen(controller: BuildController) -> ft.Control:
     header = build_header()
     catalogue_panel = build_catalogue_panel(controller)
     bag_panel = build_middle_panel(controller)

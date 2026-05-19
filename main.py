@@ -4,9 +4,9 @@ import flet as ft
 
 from app.catalogue import group_by_category, load_catalogue, validate_catalogue
 from app.config import KITS_DIR, LOG_FILE
+from app.controllers.app_controller import AppController
 from app.models import Kit, KitConfig
 from app.storage import load_all_kits
-from app.views.build import build_screen
 from app.views.error_screen import error_screen
 from app.views.page import configure_page
 
@@ -64,9 +64,9 @@ def main(page: ft.Page) -> None:
     # TODO: this is a placeholder until we have the kit selection screen built
     kit = kits[0]
 
-    build_view = build_screen(page, categories, catalogue_lookup, kit)
+    controller = AppController(page, kits, categories, catalogue_lookup)
 
-    page.add(build_view)
+    controller.show_build_screen(kit)
 
 
 if __name__ == "__main__":
