@@ -5,8 +5,7 @@ from app.views import styles
 
 def error_screen(errors: list[str]) -> ft.Control:
     error_items = [
-        ft.Text(f"• {e}", color=styles.DANGER, size=styles.BODY_SIZE)
-        for e in errors
+        ft.Text(f"• {e}", color=styles.DANGER, size=styles.BODY_SIZE) for e in errors
     ]
 
     return ft.Column(
@@ -31,7 +30,7 @@ def error_screen(errors: list[str]) -> ft.Control:
                 border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
                 border_radius=8,
                 padding=16,
-                content=ft.Column(controls=error_items, spacing=6, tight=True),
+                content=ft.Column(controls=error_items, spacing=6, tight=True),  # type: ignore
             ),
         ],
     )
