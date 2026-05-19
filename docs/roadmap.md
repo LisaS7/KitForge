@@ -66,8 +66,8 @@
 **Goal: Multiple kits usable**
 
 - [x] Screen routing / `AppController` (Kit List ↔ Build Screen ↔ Report)
-- [ ] Kit list UI — 3-column card grid with name, readiness score, weight, last modified (FR-01b)
-- [ ] Empty state (FR-01b)
+- [x] Kit list UI — 3-column card grid with name, readiness score, weight, last modified (FR-01b)
+- [x] Empty state (FR-01b)
 - [ ] "+ New Kit" → Kit Configuration modal → build screen (FR-01)
 - [ ] Kit Configuration modal — weight limit, people, duration; validation (FR-05)
 - [ ] Inline rename on build screen header (FR-02)

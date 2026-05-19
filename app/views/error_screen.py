@@ -29,8 +29,10 @@ def error_screen(errors: list[str]) -> ft.Control:
                 bgcolor=styles.SURFACE,
                 border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
                 border_radius=8,
-                padding=16,
-                content=ft.Column(controls=error_items, spacing=6, tight=True),
+                padding=styles.SECTION_SPACING,
+                content=ft.Column(
+                    controls=error_items, spacing=styles.ITEM_SPACING, tight=True
+                ),
             ),
         ],
     )

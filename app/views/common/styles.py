@@ -7,7 +7,9 @@ TEXT = "#2e2e2e"
 MUTED_TEXT = "#666666"
 
 ACCENT = "#cfcfb5"
+KHAKI = "#cfcfb5"
 PRIMARY = "#5a6e3a"
+SUCCESS = "#4a7c3f"
 WARNING = "#b87c00"
 DANGER = "#a63030"
 

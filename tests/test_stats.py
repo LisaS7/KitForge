@@ -1,5 +1,6 @@
 from app.models import CatalogueItem, Category, Kit, KitConfig
 from app.stats import KitStats
+from app.views.common import styles
 
 
 def make_config(**overrides) -> KitConfig:
@@ -81,7 +82,7 @@ def test_weight_bar_colour_green():
     # 0 g / 10000 g = 0% < 75%
     kit = Kit.create("test", make_config(weight_limit_g=10000))
     stats = KitStats.calculate_stats(kit, {})
-    assert stats.weight_bar_colour == "green"
+    assert stats.weight_bar_colour == styles.SUCCESS
 
 
 def test_weight_bar_colour_amber():
@@ -90,7 +91,7 @@ def test_weight_bar_colour_amber():
     item = make_item("a", weight_g=8000)
     kit.add_item("a")
     stats = KitStats.calculate_stats(kit, {"a": item})
-    assert stats.weight_bar_colour == "amber"
+    assert stats.weight_bar_colour == styles.WARNING
 
 
 def test_weight_bar_colour_red():
@@ -99,7 +100,7 @@ def test_weight_bar_colour_red():
     item = make_item("a", weight_g=11000)
     kit.add_item("a")
     stats = KitStats.calculate_stats(kit, {"a": item})
-    assert stats.weight_bar_colour == "red"
+    assert stats.weight_bar_colour == styles.DANGER
 
 
 def test_defaults_for_unset_fields():

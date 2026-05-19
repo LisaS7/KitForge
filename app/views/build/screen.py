@@ -8,18 +8,25 @@ from app.views.build.stats_panel import build_stats_panel
 from app.views.common import styles
 
 
-def build_header() -> ft.Container:
+def build_header(controller: BuildController) -> ft.Container:
+    name_field = ft.TextField(
+        value=controller.kit.name,
+        text_size=styles.TITLE_SIZE,
+        text_style=ft.TextStyle(weight=ft.FontWeight.BOLD),
+        border=ft.InputBorder.NONE,
+        cursor_color=styles.TEXT,
+        focused_border_color=styles.TEXT,
+        content_padding=ft.padding.symmetric(horizontal=4, vertical=0),
+        on_blur=lambda e: _save_name(e, controller),
+        on_submit=lambda e: _save_name(e, controller),
+    )
     return ft.Container(
         bgcolor=styles.ACCENT,
         border=ft.border.only(bottom=ft.BorderSide(styles.BORDER_WIDTH, styles.TEXT)),
         padding=styles.PANEL_PADDING,
         content=ft.Row(
             controls=[
-                ft.Text(
-                    value="New Kit",
-                    size=styles.TITLE_SIZE,
-                    weight=ft.FontWeight.BOLD,
-                ),
+                name_field,
                 ft.Container(expand=True),
                 ft.Button("Configure Kit"),
                 ft.Button("Build"),
@@ -29,8 +36,15 @@ def build_header() -> ft.Container:
     )
 
 
+def _save_name(e, controller: BuildController) -> None:
+    name = e.control.value.strip()
+    if name:
+        controller.kit.name = name
+        controller.schedule_save()
+
+
 def build_screen(controller: BuildController) -> ft.Control:
-    header = build_header()
+    header = build_header(controller)
     catalogue_panel = build_catalogue_panel(controller)
     bag_panel = build_middle_panel(controller)
     stats_panel = build_stats_panel(controller)

@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from app.models import CatalogueItem, Kit
+from app.views.common import styles
 
 ADULT_CALORIES_PER_DAY = 2000
 CHILD_CALORIES_PER_DAY = 1500
@@ -61,11 +62,11 @@ class KitStats:
 
         weight_percentage = total_weight_g / kit.config.weight_limit_g
         if weight_percentage < 0.75:
-            weight_bar_colour = "green"
+            weight_bar_colour = styles.SUCCESS
         elif weight_percentage < 1:
-            weight_bar_colour = "amber"
+            weight_bar_colour = styles.WARNING
         else:
-            weight_bar_colour = "red"
+            weight_bar_colour = styles.DANGER
 
         daily_calories = (
             kit.config.num_adults * ADULT_CALORIES_PER_DAY

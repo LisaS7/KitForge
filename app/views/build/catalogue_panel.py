@@ -70,22 +70,20 @@ def category_tile(category: Category, on_click, is_covered: bool) -> ft.Containe
     )
 
 
-def item_tile(item: CatalogueItem, on_click) -> ft.Container:
-    item_name = ft.Text(
-        item.name, size=styles.LABEL_SIZE, text_align=ft.TextAlign.CENTER
-    )
-    item_weight = ft.Text(
-        f"{item.weight_g}g",
-        size=styles.LABEL_SIZE,
-        color=styles.MUTED_TEXT,
-        text_align=ft.TextAlign.CENTER,
-    )
+def item_tile(item: CatalogueItem, on_click) -> ft.Tooltip:
+    tooltip_parts = [f"{item.weight_g}g"]
+    if item.calories:
+        tooltip_parts.append(f"{item.calories} kcal")
+    if item.water_ml:
+        tooltip_parts.append(f"{item.water_ml}ml water")
+    if item.notes:
+        tooltip_parts.append(item.notes)
 
-    return ft.Container(
+    tile = ft.Container(
         content=ft.Column(
             controls=[
-                item_name,
-                item_weight,
+                ft.Text(item.name, size=styles.LABEL_SIZE, text_align=ft.TextAlign.CENTER),
+                ft.Text(f"{item.weight_g}g", size=styles.LABEL_SIZE, color=styles.MUTED_TEXT, text_align=ft.TextAlign.CENTER),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
@@ -99,6 +97,8 @@ def item_tile(item: CatalogueItem, on_click) -> ft.Container:
         border=ft.border.all(styles.BORDER_WIDTH, styles.BORDER),
         bgcolor=styles.BACKGROUND,
     )
+
+    return ft.Tooltip(message=" · ".join(tooltip_parts), content=tile)
 
 
 def build_category_grid(controller: "BuildController") -> ft.GridView:
