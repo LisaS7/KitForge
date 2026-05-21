@@ -68,11 +68,16 @@
 - [x] Screen routing / `AppController` (Kit List ↔ Build Screen ↔ Report)
 - [x] Kit list UI — 3-column card grid with name, readiness score, weight, last modified (FR-01b)
 - [x] Empty state (FR-01b)
-- [ ] "+ New Kit" → Kit Configuration modal → build screen (FR-01)
-- [ ] Kit Configuration modal — weight limit, people, duration; validation (FR-05)
 - [x] Inline rename on build screen header (FR-02)
 - [ ] Copy kit from card (FR-03)
 - [ ] Delete kit from card (FR-04)
+
+### Kit Configuration Modal
+- [ ] Modal UI
+- [ ] Weight limit, people, duration fields
+- [ ] Validation
+- [ ] Create-new-kit mode
+- [ ] Edit-existing-kit mode
 
 ---
 
