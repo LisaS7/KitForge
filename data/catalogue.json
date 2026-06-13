@@ -1,0 +1,886 @@
+{
+  "items": [
+    {
+      "id": "water_bottle_1l",
+      "name": "Water Bottle (1L)",
+      "category": "Water",
+      "weight_g": 180,
+      "calories": 0,
+      "water_ml": 1000,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Reusable hard-sided bottle",
+      "requires": []
+    },
+    {
+      "id": "water_bottle_500ml",
+      "name": "Water Bottle (500ml)",
+      "category": "Water",
+      "weight_g": 100,
+      "calories": 0,
+      "water_ml": 500,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Lightweight reusable bottle",
+      "requires": []
+    },
+    {
+      "id": "collapsible_water_jug",
+      "name": "Collapsible Water Jug (4L)",
+      "category": "Water",
+      "weight_g": 120,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Folds flat when empty; for storing water at camp",
+      "requires": [
+        {
+          "type": "resource",
+          "resource": "water_source"
+        }
+      ]
+    },
+    {
+      "id": "water_purification_tablets",
+      "name": "Water Purification Tablets",
+      "category": "Water",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 20000,
+      "default_qty": 1,
+      "notes": "Pack of 50 tablets; each treats 1L of water",
+      "requires": [
+        {
+          "type": "resource",
+          "resource": "water_source"
+        }
+      ]
+    },
+    {
+      "id": "filter_straw",
+      "name": "Filter Straw",
+      "category": "Water",
+      "weight_g": 57,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 1000000,
+      "default_qty": 1,
+      "notes": "Filters up to 1000L; removes bacteria and protozoa",
+      "requires": [
+        {
+          "type": "resource",
+          "resource": "water_source"
+        }
+      ]
+    },
+    {
+      "id": "water_filter_pump",
+      "name": "Water Filter Pump",
+      "category": "Water",
+      "weight_g": 310,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 2000000,
+      "default_qty": 1,
+      "notes": "Hand pump filter; suitable for group use",
+      "requires": [
+        {
+          "type": "resource",
+          "resource": "water_source"
+        }
+      ]
+    },
+    {
+      "id": "energy_bar",
+      "name": "Energy Bar",
+      "category": "Food",
+      "weight_g": 65,
+      "calories": 250,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 6,
+      "notes": "High-calorie compact bar",
+      "requires": []
+    },
+    {
+      "id": "emergency_ration_bar",
+      "name": "Emergency Ration Bar (3600kcal)",
+      "category": "Food",
+      "weight_g": 410,
+      "calories": 3600,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Coast Guard-style 72-hour ration block",
+      "requires": []
+    },
+    {
+      "id": "freeze_dried_meal",
+      "name": "Freeze-Dried Meal",
+      "category": "Food",
+      "weight_g": 120,
+      "calories": 500,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 3,
+      "notes": "Requires boiling water to prepare",
+      "requires": [
+        {
+          "type": "category",
+          "target_category": "Fire"
+        },
+        {
+          "type": "resource",
+          "resource": "water_ml",
+          "amount": 400
+        }
+      ]
+    },
+    {
+      "id": "trail_mix",
+      "name": "Trail Mix",
+      "category": "Food",
+      "weight_g": 200,
+      "calories": 900,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Nuts, seeds, dried fruit",
+      "requires": []
+    },
+    {
+      "id": "jerky",
+      "name": "Jerky",
+      "category": "Food",
+      "weight_g": 100,
+      "calories": 350,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "High-protein dried meat",
+      "requires": []
+    },
+    {
+      "id": "instant_oats",
+      "name": "Instant Oats (pack)",
+      "category": "Food",
+      "weight_g": 80,
+      "calories": 300,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 3,
+      "notes": "Requires hot water",
+      "requires": [
+        {
+          "type": "category",
+          "target_category": "Fire"
+        },
+        {
+          "type": "resource",
+          "resource": "water_ml",
+          "amount": 300
+        }
+      ]
+    },
+    {
+      "id": "hard_candy",
+      "name": "Hard Candy (100g)",
+      "category": "Food",
+      "weight_g": 100,
+      "calories": 400,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Morale booster; quick energy",
+      "requires": []
+    },
+    {
+      "id": "first_aid_kit",
+      "name": "First Aid Kit (basic)",
+      "category": "Medical",
+      "weight_g": 300,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Bandages, gauze, antiseptic wipes, plasters, medical tape",
+      "requires": []
+    },
+    {
+      "id": "tourniquet",
+      "name": "Tourniquet",
+      "category": "Medical",
+      "weight_g": 130,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "CAT-style; for severe limb bleeding",
+      "requires": []
+    },
+    {
+      "id": "emergency_blanket",
+      "name": "Emergency Blanket",
+      "category": "Medical",
+      "weight_g": 50,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Mylar foil; retains body heat; also useful as shelter",
+      "requires": []
+    },
+    {
+      "id": "nitrile_gloves",
+      "name": "Nitrile Gloves (pair)",
+      "category": "Medical",
+      "weight_g": 20,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 3,
+      "notes": "For treating wounds without contamination",
+      "requires": []
+    },
+    {
+      "id": "pain_relief_tablets",
+      "name": "Pain Relief Tablets",
+      "category": "Medical",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Ibuprofen or paracetamol; pack of 24",
+      "requires": []
+    },
+    {
+      "id": "antihistamine_tablets",
+      "name": "Antihistamine Tablets",
+      "category": "Medical",
+      "weight_g": 20,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "For allergic reactions",
+      "requires": []
+    },
+    {
+      "id": "blister_plasters",
+      "name": "Blister Plasters",
+      "category": "Medical",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Hydrocolloid; essential for long-distance walking",
+      "requires": []
+    },
+    {
+      "id": "eyewash",
+      "name": "Sterile Eye Wash",
+      "category": "Medical",
+      "weight_g": 100,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Single-use pods or small bottle",
+      "requires": []
+    },
+    {
+      "id": "headtorch",
+      "name": "Headtorch",
+      "category": "Light",
+      "weight_g": 90,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Hands-free; essential for night navigation",
+      "requires": []
+    },
+    {
+      "id": "spare_batteries_aaa",
+      "name": "Spare Batteries (AAA, 4-pack)",
+      "category": "Light",
+      "weight_g": 50,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Match to headtorch battery type",
+      "requires": [
+        {
+          "type": "item",
+          "target_id": "headtorch"
+        }
+      ]
+    },
+    {
+      "id": "hand_crank_torch",
+      "name": "Hand-Crank Torch",
+      "category": "Light",
+      "weight_g": 150,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "No batteries needed; also useful as backup",
+      "requires": []
+    },
+    {
+      "id": "glow_sticks",
+      "name": "Glow Sticks (pack of 5)",
+      "category": "Light",
+      "weight_g": 80,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Chemical light; waterproof; useful for signalling",
+      "requires": []
+    },
+    {
+      "id": "candles",
+      "name": "Candles (pack of 4)",
+      "category": "Light",
+      "weight_g": 200,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Long-burn emergency candles",
+      "requires": [
+        {
+          "type": "category",
+          "target_category": "Fire",
+          "exclude_self": true
+        }
+      ]
+    },
+    {
+      "id": "lighter",
+      "name": "Lighter",
+      "category": "Fire",
+      "weight_g": 25,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Disposable; carry at least two",
+      "requires": []
+    },
+    {
+      "id": "waterproof_matches",
+      "name": "Waterproof Matches",
+      "category": "Fire",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Strike-anywhere; stormproof",
+      "requires": []
+    },
+    {
+      "id": "firesteel",
+      "name": "Firesteel / Ferro Rod",
+      "category": "Fire",
+      "weight_g": 60,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Works when wet; thousands of strikes",
+      "requires": []
+    },
+    {
+      "id": "fire_tinder",
+      "name": "Fire Tinder (pack)",
+      "category": "Fire",
+      "weight_g": 40,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Wax-based or cotton tinder cubes",
+      "requires": [
+        {
+          "type": "category",
+          "target_category": "Fire",
+          "exclude_self": true
+        }
+      ]
+    },
+    {
+      "id": "camp_stove",
+      "name": "Compact Camp Stove",
+      "category": "Fire",
+      "weight_g": 350,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Folds flat; for cooking and boiling water",
+      "requires": [
+        {
+          "type": "item",
+          "target_id": "gas_canister"
+        }
+      ]
+    },
+    {
+      "id": "gas_canister",
+      "name": "Gas Canister",
+      "category": "Fire",
+      "weight_g": 200,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Isobutane/propane mix; pairs with camp stove",
+      "requires": [
+        {
+          "type": "item",
+          "target_id": "camp_stove"
+        }
+      ]
+    },
+    {
+      "id": "tarp",
+      "name": "Tarp (3x3m)",
+      "category": "Shelter",
+      "weight_g": 600,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Lightweight waterproof shelter; versatile",
+      "requires": []
+    },
+    {
+      "id": "bivvy_bag",
+      "name": "Bivvy Bag",
+      "category": "Shelter",
+      "weight_g": 350,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Waterproof sleeping bag cover; emergency overnight shelter",
+      "requires": []
+    },
+    {
+      "id": "tent_2p",
+      "name": "Lightweight Tent (2-person)",
+      "category": "Shelter",
+      "weight_g": 1800,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Freestanding; for extended shelter",
+      "requires": []
+    },
+    {
+      "id": "sleeping_bag",
+      "name": "Sleeping Bag (3-season)",
+      "category": "Shelter",
+      "weight_g": 900,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Rated to 0\u00b0C; compressible",
+      "requires": []
+    },
+    {
+      "id": "paracord",
+      "name": "Paracord (30m)",
+      "category": "Shelter",
+      "weight_g": 200,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "550lb rated; for rigging tarps and shelters",
+      "requires": []
+    },
+    {
+      "id": "tent_pegs",
+      "name": "Tent Pegs (pack of 8)",
+      "category": "Shelter",
+      "weight_g": 120,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Aluminium; for securing tarp or tent",
+      "requires": [
+        {
+          "type": "category",
+          "target_category": "Shelter",
+          "exclude_self": true
+        }
+      ]
+    },
+    {
+      "id": "multi_tool",
+      "name": "Multi-Tool",
+      "category": "Tools",
+      "weight_g": 220,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Pliers, knife, screwdrivers, saw, file",
+      "requires": []
+    },
+    {
+      "id": "fixed_blade_knife",
+      "name": "Fixed Blade Knife",
+      "category": "Tools",
+      "weight_g": 180,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Full-tang; for food prep, shelter building, self-defence",
+      "requires": []
+    },
+    {
+      "id": "duct_tape",
+      "name": "Duct Tape (small roll)",
+      "category": "Tools",
+      "weight_g": 100,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Repairs gear, seals wounds, improvised shelter",
+      "requires": []
+    },
+    {
+      "id": "folding_saw",
+      "name": "Folding Saw",
+      "category": "Tools",
+      "weight_g": 150,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "For cutting firewood and shelter poles",
+      "requires": []
+    },
+    {
+      "id": "small_shovel",
+      "name": "Folding Shovel",
+      "category": "Tools",
+      "weight_g": 500,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Entrenching tool; digging latrine, clearing debris",
+      "requires": []
+    },
+    {
+      "id": "zip_ties",
+      "name": "Zip Ties (pack of 20)",
+      "category": "Tools",
+      "weight_g": 40,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Gear repair and improvised fixes",
+      "requires": []
+    },
+    {
+      "id": "wire_saw",
+      "name": "Wire Saw",
+      "category": "Tools",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Ultralight backup saw",
+      "requires": []
+    },
+    {
+      "id": "topographic_map",
+      "name": "Topographic Map (local area)",
+      "category": "Navigation",
+      "weight_g": 80,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Waterproofed or laminated; no batteries needed",
+      "requires": []
+    },
+    {
+      "id": "compass",
+      "name": "Compass",
+      "category": "Navigation",
+      "weight_g": 50,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Baseplate compass; works without power",
+      "requires": []
+    },
+    {
+      "id": "gps_device",
+      "name": "GPS Device",
+      "category": "Navigation",
+      "weight_g": 180,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Handheld; battery-powered backup navigation",
+      "requires": []
+    },
+    {
+      "id": "signal_mirror",
+      "name": "Signal Mirror",
+      "category": "Navigation",
+      "weight_g": 30,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "For signalling rescuers; visible for miles",
+      "requires": []
+    },
+    {
+      "id": "whistle",
+      "name": "Emergency Whistle",
+      "category": "Navigation",
+      "weight_g": 10,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Pealess; audible signalling device",
+      "requires": []
+    },
+    {
+      "id": "hand_sanitiser",
+      "name": "Hand Sanitiser (100ml)",
+      "category": "Hygiene",
+      "weight_g": 110,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Reduces infection risk when water is scarce",
+      "requires": []
+    },
+    {
+      "id": "wet_wipes",
+      "name": "Wet Wipes (pack of 30)",
+      "category": "Hygiene",
+      "weight_g": 150,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Body cleaning without water",
+      "requires": []
+    },
+    {
+      "id": "toilet_paper",
+      "name": "Toilet Paper (compressed roll)",
+      "category": "Hygiene",
+      "weight_g": 80,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 2,
+      "notes": "Compressed travel roll",
+      "requires": []
+    },
+    {
+      "id": "toothbrush_toothpaste",
+      "name": "Toothbrush & Toothpaste",
+      "category": "Hygiene",
+      "weight_g": 60,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Travel-size; oral hygiene prevents infection",
+      "requires": []
+    },
+    {
+      "id": "soap_bar",
+      "name": "Soap Bar (travel size)",
+      "category": "Hygiene",
+      "weight_g": 50,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Multi-use: body, hands, laundry",
+      "requires": []
+    },
+    {
+      "id": "sanitary_pads",
+      "name": "Sanitary Pads (pack)",
+      "category": "Hygiene",
+      "weight_g": 150,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Also useful as wound dressings",
+      "requires": []
+    },
+    {
+      "id": "waste_bags",
+      "name": "Waste Bags (pack of 10)",
+      "category": "Hygiene",
+      "weight_g": 40,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Sanitation and waste disposal",
+      "requires": []
+    },
+    {
+      "id": "hand_crank_radio",
+      "name": "Hand-Crank Emergency Radio",
+      "category": "Communication",
+      "weight_g": 350,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "AM/FM/NOAA weather; solar and hand-crank charging",
+      "requires": []
+    },
+    {
+      "id": "walkie_talkies",
+      "name": "Walkie-Talkies (pair)",
+      "category": "Communication",
+      "weight_g": 400,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Short-range group communication; no infrastructure needed",
+      "requires": []
+    },
+    {
+      "id": "power_bank",
+      "name": "Power Bank (10000mAh)",
+      "category": "Communication",
+      "weight_g": 250,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Keeps phone and devices charged",
+      "requires": []
+    },
+    {
+      "id": "solar_charger",
+      "name": "Solar Charger Panel",
+      "category": "Communication",
+      "weight_g": 300,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Foldable; charges power bank or devices directly",
+      "requires": [
+        {
+          "type": "item",
+          "target_id": "power_bank"
+        }
+      ]
+    },
+    {
+      "id": "notepad_pen",
+      "name": "Notepad & Pen",
+      "category": "Communication",
+      "weight_g": 60,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Leaving messages, recording information",
+      "requires": []
+    },
+    {
+      "id": "id_documents_copy",
+      "name": "ID Documents (copies)",
+      "category": "Documents",
+      "weight_g": 20,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Passport, driving licence, birth certificate \u2014 laminated or in waterproof pouch",
+      "requires": []
+    },
+    {
+      "id": "cash",
+      "name": "Cash (small denominations)",
+      "category": "Documents",
+      "weight_g": 10,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Card payments may be unavailable; keep in waterproof pouch",
+      "requires": []
+    },
+    {
+      "id": "emergency_contacts_card",
+      "name": "Emergency Contacts Card",
+      "category": "Documents",
+      "weight_g": 5,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Laminated card with key phone numbers and meeting points",
+      "requires": []
+    },
+    {
+      "id": "insurance_documents",
+      "name": "Insurance Documents (copies)",
+      "category": "Documents",
+      "weight_g": 20,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Health, home, vehicle insurance details",
+      "requires": []
+    },
+    {
+      "id": "waterproof_document_pouch",
+      "name": "Waterproof Document Pouch",
+      "category": "Documents",
+      "weight_g": 40,
+      "calories": 0,
+      "water_ml": 0,
+      "water_purification_ml": 0,
+      "default_qty": 1,
+      "notes": "Keeps all documents dry",
+      "requires": []
+    }
+  ]
+}
