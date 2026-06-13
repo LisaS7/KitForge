@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wireframe – Build Screen</title>
+<style>
+  :root {
+    --bg:        #f1f1f1;
+    --surface:   #d9d9d9;
+    --border:    #c7c7c7;
+    --khaki:     #cfcfb5;
+    --dark:      #2e2e2e;
+    --olive:     #5a6e3a;
+    --warning:   #b87c00;
+    --danger:    #a63030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; font-size: 13px; background: var(--border); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+  .window { width: 1200px; height: 800px; background: var(--bg); border: 2px solid var(--dark); display: flex; flex-direction: column; color: var(--dark); }
+
+  /* Header */
+  .header { display: flex; align-items: center; padding: 10px 16px; border-bottom: 2px solid var(--dark); gap: 12px; background: var(--khaki); }
+  .kit-name { font-size: 16px; font-weight: bold; border: 1px dashed var(--border); padding: 4px 8px; cursor: text; color: var(--dark); }
+  .kit-name span { font-size: 11px; color: #888; margin-left: 6px; font-weight: normal; }
+  .header-actions { margin-left: auto; display: flex; gap: 8px; }
+  .btn { padding: 6px 14px; border: 2px solid var(--dark); background: var(--bg); cursor: pointer; font-size: 13px; color: var(--dark); }
+  .btn-primary { background: var(--olive); color: #fff; border-color: var(--olive); }
+
+  /* Main area */
+  .main { display: flex; flex: 1; overflow: hidden; }
+
+  /* Catalogue panel */
+  .catalogue { width: 220px; border-right: 2px solid var(--dark); display: flex; flex-direction: column; }
+  .panel-title { padding: 8px 12px; font-weight: bold; background: var(--surface); border-bottom: 1px solid var(--border); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+  .cat-icon { border: 1px solid var(--border); padding: 10px 4px; text-align: center; cursor: pointer; background: var(--bg); }
+  .cat-icon .icon { font-size: 22px; display: block; }
+  .cat-icon .label { font-size: 10px; margin-top: 4px; display: block; }
+  .cat-icon.warning .label::after { content: " ⚠"; color: var(--danger); }
+
+  /* Item view alternate state */
+  .back-btn { padding: 6px 12px; border: none; border-bottom: 1px solid var(--border); background: var(--surface); cursor: pointer; text-align: left; font-size: 12px; color: var(--dark); }
+  .item-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+  .item-icon { border: 1px solid var(--border); padding: 8px 4px; text-align: center; cursor: grab; background: var(--bg); }
+  .item-icon .icon { font-size: 18px; display: block; }
+  .item-icon .label { font-size: 10px; margin-top: 3px; display: block; }
+
+  /* Centre */
+  .centre { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 2px solid var(--dark); background: var(--bg); gap: 12px; }
+  .bag-area { width: 280px; height: 360px; border: 2px dashed var(--border); display: flex; align-items: center; justify-content: center; flex-direction: column; color: #aaa; font-size: 12px; }
+  .bag-area .bag-icon { font-size: 80px; }
+  .drop-hint { font-size: 11px; color: #bbb; }
+
+  /* Stats bar */
+  .stats { width: 100%; border-top: 2px solid var(--dark); padding: 10px 20px; background: var(--surface); display: flex; align-items: center; gap: 24px; }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-label { font-size: 10px; color: #666; text-transform: uppercase; }
+  .stat-value { font-size: 13px; font-weight: bold; }
+  .weight-bar-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .weight-bar { width: 120px; height: 10px; background: var(--border); border: 1px solid #aaa; }
+  .weight-fill { width: 40%; height: 100%; background: var(--olive); }
+  .readiness { margin-left: auto; font-size: 18px; font-weight: bold; color: var(--olive); }
+  .readiness-label { font-size: 10px; color: #666; text-transform: uppercase; }
+
+  /* Packed items panel */
+  .packed { width: 240px; display: flex; flex-direction: column; overflow-y: auto; }
+  .category-group { border-bottom: 1px solid var(--border); }
+  .category-group-header { padding: 6px 12px; background: var(--surface); font-weight: bold; font-size: 12px; cursor: pointer; display: flex; justify-content: space-between; }
+  .category-group-header .toggle { color: #888; }
+  .packed-item { display: flex; align-items: center; padding: 5px 12px; border-bottom: 1px solid var(--border); gap: 6px; background: var(--bg); }
+  .packed-item-name { flex: 1; font-size: 12px; }
+  .qty-controls { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+  .qty-btn { width: 18px; height: 18px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; line-height: 1; text-align: center; color: var(--dark); }
+  .qty { min-width: 16px; text-align: center; }
+
+  .note { font-size: 10px; color: #888; font-style: italic; padding: 4px 12px; }
+  .state-label { font-size: 10px; color: #888; text-align: center; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="window">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="kit-name">72-Hour BOB <span>(click to edit)</span></div>
+    <div class="header-actions">
+      <button class="btn">⚙ Configure Kit</button>
+      <button class="btn btn-primary">▶ Build</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- Left: Catalogue (category view) -->
+    <div class="catalogue">
+      <div class="panel-title">Catalogue</div>
+      <div class="category-grid">
+        <div class="cat-icon"><span class="icon">💧</span><span class="label">Water</span></div>
+        <div class="cat-icon"><span class="icon">🍫</span><span class="label">Food</span></div>
+        <div class="cat-icon warning"><span class="icon">🩹</span><span class="label">Medical</span></div>
+        <div class="cat-icon"><span class="icon">🔦</span><span class="label">Light</span></div>
+        <div class="cat-icon warning"><span class="icon">🔥</span><span class="label">Fire</span></div>
+        <div class="cat-icon"><span class="icon">⛺</span><span class="label">Shelter</span></div>
+        <div class="cat-icon"><span class="icon">🔧</span><span class="label">Tools</span></div>
+        <div class="cat-icon"><span class="icon">🧭</span><span class="label">Navigation</span></div>
+      </div>
+      <div class="note">⚠ = category needs attention</div>
+
+      <!-- Alternate state: item view (shown when a category is clicked) -->
+      <div style="margin-top: 24px; border-top: 2px dashed #ccc; padding-top: 8px;">
+        <div class="state-label">— alternate state: after clicking a category —</div>
+        <button class="back-btn">← Water</button>
+        <div class="item-grid">
+          <div class="item-icon"><span class="icon">🫙</span><span class="label">Water bottle</span></div>
+          <div class="item-icon"><span class="icon">💊</span><span class="label">Purif. tablets</span></div>
+          <div class="item-icon"><span class="icon">🪣</span><span class="label">Collapsible jug</span></div>
+          <div class="item-icon"><span class="icon">🔩</span><span class="label">Filter straw</span></div>
+        </div>
+        <div class="note">Drag item onto bag to add</div>
+      </div>
+    </div>
+
+    <!-- Centre: bag + stats -->
+    <div class="centre">
+      <div class="bag-area">
+        <span class="bag-icon">🎒</span>
+        <span class="drop-hint">Drag items here</span>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="stats">
+        <div class="weight-bar-wrap">
+          <div class="stat-label">Weight</div>
+          <div style="font-size:13px; font-weight:bold;">4.2 kg / 15 kg</div>
+          <div class="weight-bar"><div class="weight-fill"></div></div>
+          <div class="note" style="padding:0; font-size:10px; color:#5a6e3a;">● Good</div>
+        </div>
+        <div class="stat"><span class="stat-label">Calories</span><span class="stat-value">2,400 kcal</span></div>
+        <div class="stat"><span class="stat-label">Water</span><span class="stat-value">4 L</span></div>
+        <div class="stat"><span class="stat-label">Duration</span><span class="stat-value">3 days</span></div>
+        <div style="margin-left:auto; text-align:center;">
+          <div class="readiness-label">Readiness</div>
+          <div class="readiness">72%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Packed items -->
+    <div class="packed">
+      <div class="panel-title">Packed Items</div>
+
+      <div class="category-group">
+        <div class="category-group-header">💧 Water <span class="toggle">▾</span></div>
+        <div class="packed-item">
+          <span class="packed-item-name">Water bottle</span>
+          <div class="qty-controls"><button class="qty-btn">−</button><span class="qty">2</span><button class="qty-btn">+</button></div>
+        </div>
+        <div class="packed-item">
+          <span class="packed-item-name">Purif. tablets</span>
+          <div class="qty-controls"><button class="qty-btn">−</button><span class="qty">1</span><button class="qty-btn">+</button></div>
+        </div>
+      </div>
+
+      <div class="category-group">
+        <div class="category-group-header">🍫 Food <span class="toggle">▾</span></div>
+        <div class="packed-item">
+          <span class="packed-item-name">Energy bar</span>
+          <div class="qty-controls"><button class="qty-btn">−</button><span class="qty">6</span><button class="qty-btn">+</button></div>
+        </div>
+      </div>
+
+      <div class="category-group">
+        <div class="category-group-header">🔦 Light <span class="toggle">▾</span></div>
+        <div class="packed-item">
+          <span class="packed-item-name">Headtorch</span>
+          <div class="qty-controls"><button class="qty-btn">−</button><span class="qty">1</span><button class="qty-btn">+</button></div>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top: 8px;">− reduces qty; reaches 0 = item removed</div>
+    </div>
+
+  </div><!-- /.main -->
+</div><!-- /.window -->
+</body>
+</html>

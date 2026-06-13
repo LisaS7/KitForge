@@ -1,0 +1,114 @@
+# KitForge — Development Roadmap
+
+## Phase 1: App Skeleton + Data
+**Goal: See catalogue in UI**
+
+- [ ] Define core Pydantic models
+- [ ] Load `catalogue.json`
+- [ ] Minimal PySide6 app (single screen)
+- [ ] Render catalogue items
+
+---
+
+## Phase 2: Basic Kit Building
+**Goal: Add/remove items in memory**
+
+- [ ] Create in-memory kit
+- [ ] Add item (FR-08)
+- [ ] Increment existing item (FR-08)
+- [ ] Decrement/remove item (FR-09, FR-10)
+- [ ] Display packed items list
+
+---
+
+## Phase 3: Build Screen Layout & Styling
+**Goal: Match wireframe structure and visual language**
+
+- [ ] Design build screen layout in Qt Designer (3-panel: catalogue / centre / packed items)
+- [ ] Split into component files: `catalogue_panel.py`, `centre_panel.py`, `kit_panel.py`
+- [ ] Add category metadata (icons) to `icons.py` constants module
+- [ ] Khaki header bar with kit name and action buttons (Configure / Build)
+- [ ] Panel titles: uppercase (`CATALOGUE`, `KIT LIST`)
+- [ ] Hard borders between panels (Qt stylesheet)
+- [ ] Category icon grid in catalogue panel (square tiles, `QGridLayout`)
+- [ ] Catalogue view state: category grid → item grid → back button (FR-06)
+- [ ] Bag area: centred image with drop hint
+- [ ] Stats bar shell: weight, calories, water, duration, readiness score (layout only)
+- [ ] Packed items grouped by category with collapsible headers (FR-11)
+- [ ] Compact qty controls (small −/+ buttons)
+- [ ] Update `styles.py` with layout tokens: `CATALOGUE_WIDTH`, `KIT_PANEL_WIDTH`, `TILE_SIZE`, `ICON_SIZE`
+
+---
+
+## Phase 4: Stats Layer
+**Goal: App feels "alive"**
+
+- [ ] Stats service: `get_total_weight()`, `get_calories()`, `get_water_ml()` (FR-14)
+- [ ] Wire stats into stats bar (live update on add/remove)
+- [ ] Weight bar with colour thresholds: green <75%, amber 75–99%, red ≥100% (FR-13)
+- [ ] Calories and water shown as fraction of requirement (people × duration) (FR-14)
+- [ ] Warning indicator on category cards for uncovered categories (FR-14b)
+
+---
+
+## Phase 5: Persistence
+**Goal: Data survives reboot**
+
+- [ ] Save kit to `data/kits/<id>.json` (FR-19)
+- [ ] Auto-save with debounce (~500ms); immediate save on close/switch/report (FR-19)
+- [ ] Load all kits from `data/kits/*.json` on launch (FR-20)
+- [ ] Catalogue integrity check on startup (FR-21)
+- [ ] Display errors on startup for failed validation
+
+---
+
+## Phase 6: Kit List Screen
+**Goal: Multiple kits usable**
+
+- [ ] Screen routing / `QStackedWidget` (Kit List ↔ Build Screen ↔ Report)
+- [ ] Kit list UI — 3-column card grid with name, readiness score, weight, last modified (FR-01b)
+- [ ] Empty state (FR-01b)
+- [ ] Inline rename on build screen header (FR-02)
+- [ ] Copy kit from card (FR-03)
+- [ ] Delete kit from card (FR-04)
+
+### Kit Configuration Modal
+
+- [ ] Modal UI (`QDialog`, designed in Qt Designer)
+- [ ] Weight limit, people, duration fields
+- [ ] Validation
+- [ ] Create-new-kit mode
+- [ ] Edit-existing-kit mode
+
+---
+
+## Phase 7: Readiness System
+**Goal: Identify gaps in kit coverage**
+
+- [ ] Readiness score calculation — weighted category coverage (FR-16)
+- [ ] Score live in stats bar (FR-16)
+- [ ] Missing category list ordered Required → Warning → Optional (FR-17)
+- [ ] Dependency warnings per packed item (FR-18)
+- [ ] `water_source` shown as informational note, not warning (FR-18)
+
+---
+
+## Phase 8: Readiness Report Screen
+**Goal: Dedicated view for full readiness breakdown**
+
+- [ ] Screen routing to Report view (FR-15)
+- [ ] "Build" button saves kit and navigates to report (FR-15)
+- [ ] Back/edit button returns to build screen (FR-15)
+- [ ] Full readiness score display (FR-16)
+- [ ] Missing categories section (FR-17)
+- [ ] Dependency warnings section (FR-18)
+
+---
+
+## Phase 9: UX Polish
+**Goal: Smooth, complete experience**
+
+- [ ] Item tooltips: weight, calories, water, notes (FR-07)
+- [ ] Drag & drop: catalogue → bag area (FR-08b)
+- [ ] Debounced auto-save
+- [ ] Rename/copy/delete polish

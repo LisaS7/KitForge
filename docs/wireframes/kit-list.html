@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wireframe – Kit List</title>
+<style>
+  :root {
+    --bg:        #f1f1f1;
+    --surface:   #d9d9d9;
+    --border:    #c7c7c7;
+    --khaki:     #cfcfb5;
+    --dark:      #2e2e2e;
+    --olive:     #5a6e3a;
+    --warning:   #b87c00;
+    --danger:    #a63030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; font-size: 13px; background: var(--border); display: flex; justify-content: center; align-items: center; min-height: 100vh; color: var(--dark); }
+
+  .window { width: 1200px; height: 800px; background: var(--bg); border: 2px solid var(--dark); display: flex; flex-direction: column; }
+
+  .header { display: flex; align-items: center; padding: 10px 24px; border-bottom: 2px solid var(--dark); background: var(--khaki); }
+  .app-title { font-size: 20px; font-weight: bold; letter-spacing: 0.05em; }
+  .app-subtitle { font-size: 12px; color: #666; margin-left: 10px; }
+  .btn { padding: 6px 14px; border: 2px solid var(--dark); background: var(--bg); cursor: pointer; font-size: 13px; color: var(--dark); }
+  .btn-primary { background: var(--olive); color: #fff; border-color: var(--olive); margin-left: auto; }
+
+  .content { flex: 1; padding: 32px 48px; overflow-y: auto; }
+  .section-title { font-size: 14px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 16px; }
+
+  .kit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .kit-card { border: 2px solid var(--dark); background: var(--bg); cursor: pointer; display: flex; flex-direction: column; }
+  .kit-card:hover { background: var(--khaki); }
+  .kit-card-body { padding: 16px; flex: 1; }
+  .kit-card-name { font-size: 15px; font-weight: bold; margin-bottom: 10px; }
+  .kit-meta { display: flex; flex-direction: column; gap: 4px; }
+  .kit-meta-row { display: flex; justify-content: space-between; font-size: 12px; }
+  .kit-meta-row .label { color: #888; }
+  .readiness-score { font-size: 22px; font-weight: bold; margin-top: 10px; }
+  .readiness-score.high { color: var(--olive); }
+  .readiness-score.mid { color: var(--warning); }
+  .readiness-score.low { color: var(--danger); }
+  .readiness-label { font-size: 10px; color: #888; text-transform: uppercase; }
+
+  .kit-card-footer { border-top: 1px solid var(--border); display: flex; }
+  .kit-action { flex: 1; padding: 7px; text-align: center; font-size: 12px; border: none; background: none; cursor: pointer; border-right: 1px solid var(--border); color: var(--dark); }
+  .kit-action:last-child { border-right: none; }
+  .kit-action:hover { background: var(--surface); }
+  .kit-action.danger:hover { background: #f5e0e0; color: var(--danger); }
+
+  .empty-state { text-align: center; padding: 80px 0; color: #aaa; }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="window">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="app-title">KitForge</span>
+    <span class="app-subtitle">Emergency Kit Planner</span>
+    <button class="btn btn-primary">+ New Kit</button>
+  </div>
+
+  <!-- Kit list -->
+  <div class="content">
+    <div class="section-title">Your Kits</div>
+    <div class="kit-grid">
+
+      <div class="kit-card">
+        <div class="kit-card-body">
+          <div class="kit-card-name">72-Hour BOB</div>
+          <div class="readiness-score high">87%</div>
+          <div class="readiness-label">Readiness</div>
+          <div class="kit-meta" style="margin-top:10px;">
+            <div class="kit-meta-row"><span class="label">Weight</span><span>6.4 kg / 15 kg</span></div>
+            <div class="kit-meta-row"><span class="label">Last modified</span><span>2 May 2026</span></div>
+          </div>
+        </div>
+        <div class="kit-card-footer">
+          <button class="kit-action">✎ Edit</button>
+          <button class="kit-action">⧉ Copy</button>
+          <button class="kit-action danger">🗑 Delete</button>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-body">
+          <div class="kit-card-name">Car Emergency Kit</div>
+          <div class="readiness-score mid">54%</div>
+          <div class="readiness-label">Readiness</div>
+          <div class="kit-meta" style="margin-top:10px;">
+            <div class="kit-meta-row"><span class="label">Weight</span><span>3.1 kg / 10 kg</span></div>
+            <div class="kit-meta-row"><span class="label">Last modified</span><span>28 Apr 2026</span></div>
+          </div>
+        </div>
+        <div class="kit-card-footer">
+          <button class="kit-action">✎ Edit</button>
+          <button class="kit-action">⧉ Copy</button>
+          <button class="kit-action danger">🗑 Delete</button>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-body">
+          <div class="kit-card-name">Kids School Bag</div>
+          <div class="readiness-score low">31%</div>
+          <div class="readiness-label">Readiness</div>
+          <div class="kit-meta" style="margin-top:10px;">
+            <div class="kit-meta-row"><span class="label">Weight</span><span>1.2 kg / 5 kg</span></div>
+            <div class="kit-meta-row"><span class="label">Last modified</span><span>15 Apr 2026</span></div>
+          </div>
+        </div>
+        <div class="kit-card-footer">
+          <button class="kit-action">✎ Edit</button>
+          <button class="kit-action">⧉ Copy</button>
+          <button class="kit-action danger">🗑 Delete</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty state (shown when no kits exist) -->
+    <div class="empty-state" style="margin-top: 48px; border-top: 1px dashed #ccc; padding-top: 48px;">
+      <div style="font-size:11px; color:#bbb; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">— empty state (no kits yet) —</div>
+      <div class="icon">🎒</div>
+      <p>You don't have any kits yet.</p>
+      <p style="margin-top: 6px;">Click <strong>+ New Kit</strong> to get started.</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
