@@ -14,7 +14,7 @@
         {
             "label": "Run Tests",
             "type": "shell",
-            "command": "uv run pytest"
+            "command": "uv run pytest tests/ -v"
         }
     ]
 }
