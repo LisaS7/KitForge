@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KitForge</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">
+    <span class="app-title">KitForge</span>
+    <span class="app-subtitle">Emergency Kit Planner</span>
+  </div>
+  <a href="/kits/new" class="btn btn-primary">+ New Kit</a>
+</div>
+
+<div class="content">
+  <div class="section-title">Your Kits</div>
+
+  {% if kits %}
+  <div class="kit-grid">
+    {% for kit in kits %}
+    <div class="kit-card">
+      <div class="kit-card-body">
+        <div class="kit-card-name">{{ kit.name }}</div>
+        <div class="readiness-score">—</div>
+        <div class="readiness-label">Readiness</div>
+        <div class="kit-meta">
+          <div class="kit-meta-row">
+            <span class="label">Weight</span>
+            <span>—</span>
+          </div>
+          <div class="kit-meta-row">
+            <span class="label">Last modified</span>
+            <span>{{ kit.modified_at.strftime("%-d %B %Y") }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="kit-card-footer">
+        <a href="/kits/{{ kit.id }}/edit" class="kit-action">✎ Edit</a>
+        <a href="/kits/{{ kit.id }}/copy" class="kit-action">⧉ Copy</a>
+        <button class="kit-action danger" data-kit-id="{{ kit.id }}">🗑 Delete</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="empty-icon">🎒</div>
+    <p>You don't have any kits yet.</p>
+    <p>Click <strong>+ New Kit</strong> to get started.</p>
+  </div>
+  {% endif %}
+</div>
+
+</body>
+</html>

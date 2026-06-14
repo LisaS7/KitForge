@@ -2,14 +2,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Qt Designer",
+            "label": "Run Web Dev Server",
             "type": "shell",
-            "command": "uv run pyside6-designer"
+            "command": "uv run uvicorn main:app --reload"
         },
         {
-            "label": "Run KitForge",
+            "label": "Run Desktop App",
             "type": "shell",
-            "command": "uv run main.py"
+            "command": "uv run desktop.py"
+        },
+        {
+            "label": "Run Tests",
+            "type": "shell",
+            "command": "uv run pytest"
         }
     ]
 }

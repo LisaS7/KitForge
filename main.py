@@ -1,33 +1,25 @@
 import logging
-import sys
 
-from PySide6.QtWidgets import QApplication
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from src.config import KITS_DIR, LOG_FILE, PROJECT_ROOT
 from src.store import load_all
-from src.views.kit_list_view import KitListView
 
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-    handlers=[
-        logging.FileHandler(LOG_FILE),
-    ],
+    handlers=[logging.FileHandler(LOG_FILE)],
 )
 
+app = FastAPI()
+app.mount("/static", StaticFiles(directory=PROJECT_ROOT / "src" / "static"), name="static")
+templates = Jinja2Templates(directory=PROJECT_ROOT / "src" / "templates")
 
-def main():
-    app = QApplication(sys.argv)
-    qss = (PROJECT_ROOT / "src" / "styles.qss").read_text()
-    app.setStyleSheet(qss)
 
+@app.get("/", response_class=HTMLResponse)
+async def kit_list(request: Request):
     kits = load_all(KITS_DIR)
-
-    view = KitListView(kits=kits)
-    view.resize(1200, 800)
-    view.show()
-    sys.exit(app.exec())
-
-
-if __name__ == "__main__":
-    main()
+    return templates.TemplateResponse(request, "kit_list.html", {"kits": kits})

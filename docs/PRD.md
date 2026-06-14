@@ -115,7 +115,7 @@ The following are explicitly deferred to future versions:
 |---|---|
 | Platform | Desktop (Linux primary; Windows and macOS not tested for MVP) |
 | Language | Python |
-| GUI framework | PySide6 (Qt Designer for layouts) |
+| GUI framework | FastAPI + Jinja2 + HTML/CSS (served via uvicorn; pywebview for future desktop packaging) |
 | Architecture | Builder design pattern |
 | Window size | Fixed, ~1200×800 |
 | Offline | Fully offline; no network calls |
