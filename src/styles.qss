@@ -6,16 +6,42 @@ QWidget {
     font-size: 13px;
 }
 
+QWidget#Form,
+QWidget#cards_container {
+    background-color: #f1f1f1;
+}
+
+QLabel {
+    background-color: transparent;
+}
+
+QWidget#widget_meta,
+QWidget#header_title_container,
+QWidget#content {
+    background-color: transparent;
+}
+
 /* ── Header bar (khaki) ── */
 QWidget#header_bar {
     background-color: #cfcfb5;
-    border-bottom: 1px solid #2e2e2e;
+    border-bottom: 2px solid #2e2e2e;
 }
 
 QLabel#lbl_title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    background-color: transparent;
+}
+
+QLabel#lbl_subtitle {
+    font-size: 12px;
+    color: #666666;
+}
+
+/* ── Section title ── */
+QLabel#lbl_section_title {
+    font-size: 14px;
+    color: #666666;
+    font-weight: bold;
 }
 
 /* ── Buttons ── */
@@ -23,7 +49,7 @@ QPushButton {
     background-color: #d9d9d9;
     color: #2e2e2e;
     border: 1px solid #2e2e2e;
-    padding: 4px 12px;
+    padding: 6px 14px;
 }
 
 QPushButton:hover {
@@ -33,7 +59,7 @@ QPushButton:hover {
 QPushButton#btn_new_kit {
     background-color: #5a6e3a;
     color: #f1f1f1;
-    border: 1px solid #2e2e2e;
+    border-color: #5a6e3a;
 }
 
 QPushButton#btn_new_kit:hover {
@@ -47,26 +73,79 @@ QScrollArea {
 
 /* ── Kit cards ── */
 QFrame#kit_card {
-    background-color: #d9d9d9;
-    border: 1px solid #2e2e2e;
+    background-color: #f1f1f1;
+    border: 2px solid #2e2e2e;
 }
 
 QFrame#kit_card:hover {
-    background-color: #c7c7c7;
+    background-color: #cfcfb5;
 }
 
-/* ── Readiness score labels ── */
+QLabel#lbl_name {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+QLabel#lbl_score {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+QLabel#lbl_readiness_caption {
+    font-size: 10px;
+    color: #888888;
+}
+
+QLabel#lbl_weight_label,
+QLabel#lbl_modified_label {
+    font-size: 12px;
+    color: #888888;
+}
+
+QLabel#lbl_weight,
+QLabel#lbl_modified {
+    font-size: 12px;
+}
+
+QFrame#footer {
+    background-color: transparent;
+    border-top: 1px solid #c7c7c7;
+}
+
+QPushButton#btn_edit,
+QPushButton#btn_copy,
+QPushButton#btn_delete {
+    border: none;
+    border-right: 1px solid #c7c7c7;
+    padding: 7px 12px;
+    background-color: transparent;
+    font-size: 12px;
+    color: #2e2e2e;
+}
+
+QPushButton#btn_delete {
+    border-right: none;
+}
+
+QPushButton#btn_edit:hover,
+QPushButton#btn_copy:hover {
+    background-color: #d9d9d9;
+}
+
+QPushButton#btn_delete:hover {
+    background-color: #f5e0e0;
+    color: #a63030;
+}
+
+/* ── Readiness score variants ── */
 QLabel#lbl_score_high {
     color: #5a6e3a;
-    font-weight: bold;
 }
 
 QLabel#lbl_score_medium {
     color: #b87c00;
-    font-weight: bold;
 }
 
 QLabel#lbl_score_low {
     color: #a63030;
-    font-weight: bold;
 }

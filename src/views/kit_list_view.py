@@ -6,6 +6,7 @@ from PySide6.QtWidgets import QGridLayout, QLabel, QWidget
 
 from src.config import PROJECT_ROOT
 from src.models import Kit
+from src.views.kit_card import KitCard
 
 UI_PATH = PROJECT_ROOT / "src" / "views" / "ui" / "kit_list.ui"
 
@@ -23,7 +24,9 @@ class KitListView(QWidget):
 
         self.ui.btn_new_kit.clicked.connect(self.new_kit_requested)
 
-        self._cards_layout = QGridLayout(self.ui.cards_container)
+        self._cards_layout = self.ui.cards_container.layout()
+        self._cards_layout.setContentsMargins(0, 0, 0, 0)
+        self._cards_layout.setSpacing(16)
         self._populate(kits)
 
     def _populate(self, kits):
@@ -33,4 +36,4 @@ class KitListView(QWidget):
             )
             return
         for i, kit in enumerate(kits):
-            self._cards_layout.addWidget(QLabel(kit.name), i // 3, i % 3)
+            self._cards_layout.addWidget(KitCard(kit), i // 3, i % 3)
