@@ -3,7 +3,8 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from src.config import LOG_FILE, PROJECT_ROOT
+from src.config import KITS_DIR, LOG_FILE, PROJECT_ROOT
+from src.store import load_all
 from src.views.kit_list_view import KitListView
 
 logging.basicConfig(
@@ -20,7 +21,9 @@ def main():
     qss = (PROJECT_ROOT / "src" / "styles.qss").read_text()
     app.setStyleSheet(qss)
 
-    view = KitListView()
+    kits = load_all(KITS_DIR)
+
+    view = KitListView(kits=kits)
     view.resize(1200, 800)
     view.show()
     sys.exit(app.exec())
