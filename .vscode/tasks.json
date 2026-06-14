@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Qt Designer",
+            "type": "shell",
+            "command": "uv run pyside6-designer"
+        },
+        {
+            "label": "Run KitForge",
+            "type": "shell",
+            "command": "uv run main.py"
+        }
+    ]
+}
